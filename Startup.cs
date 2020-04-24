@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MarketIO.MVC.Instrallers;
 
 namespace MarketIO.MVC
 {
@@ -23,7 +24,7 @@ namespace MarketIO.MVC
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.InstallServicesInAssemply(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
