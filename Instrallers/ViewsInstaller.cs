@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using MarketIO.MVC.Repositories;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace MarketIO.MVC.Instrallers
@@ -8,6 +9,7 @@ namespace MarketIO.MVC.Instrallers
         public void InstallServices(IServiceCollection services, IConfiguration configuration)
         {
             services.AddControllersWithViews();
+            services.AddTransient<IProductRepository, ProductRepository>();
         }
     }
 }
