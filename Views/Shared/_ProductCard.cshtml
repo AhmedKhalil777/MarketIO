@@ -1,8 +1,9 @@
 ﻿@model Products
 
+
 <div class="col-sm-4 col-lg-4 col-md-4">
     <div class="thumbnail">
-        <img src="@Model.Image" alt="">
+        <img src="~/images/@Model.Image" alt="">
         <div class="caption">
             <h3 class="pull-right">@Model.Price.ToString("c")</h3>
             <h3>
