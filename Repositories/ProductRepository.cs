@@ -12,7 +12,8 @@ namespace MarketIO.MVC.Repositories
         private readonly MarketIODbContext _db;
         public ProductRepository(MarketIODbContext db)
         {
-            _db = db;
+            _db = db; 
         }
+
     }
 }
