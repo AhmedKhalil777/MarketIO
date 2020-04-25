@@ -1,4 +1,6 @@
 ﻿using MarketIO.MVC.Data;
+using MarketIO.MVC.Domain;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +16,5 @@ namespace MarketIO.MVC.Repositories
         {
             _db = db; 
         }
-
     }
 }

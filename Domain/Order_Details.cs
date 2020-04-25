@@ -15,7 +15,7 @@ namespace MarketIO.MVC.Domain
         [Key, Column(Order = 2)]
         public int Product_Id { get; set; }
 
-        public float Current_Price { get; set; }
+        public decimal Current_Price { get; set; }
 
         public int Amount { get; set; }
 

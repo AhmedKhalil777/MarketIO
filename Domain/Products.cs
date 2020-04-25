@@ -10,27 +10,19 @@ namespace MarketIO.MVC.Domain
     {
         [Key]
         public int Product_Id { get; set; }
-
         [Required]
         [MaxLength(100)]
         public string P_Name { get; set; }
-
         [MaxLength(300)]
         public string Description { get; set; }
-
         public string Image { get; set; }
-
         [Range(1,5)]
         public int Evaluation { get; set; }
-
         [Required]
-        public float Price { get; set; }
-
-
+        public decimal Price { get; set; }
+        public bool IsProductOfTheWeek { get; set; }
         [Required]
         public int Quantity { get; set; }
-
-
         public Brands Brand { get; set; }
         public Categories Category { get; set; }
 

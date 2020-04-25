@@ -16,6 +16,13 @@ namespace MarketIO.MVC.Data
 
         }
 
+        public DbSet<Products> Products { get; set; }
+        public DbSet<Orders> Orders { get; set; }
+        public DbSet<Order_Details> Order_Details { get; set; }
+        public DbSet<Brands> Brands { get; set; }
+        public DbSet<Categories> Categories { get; set; }
+        public DbSet<ShoppingCartItem> ShoppingCartItems { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
