@@ -32,7 +32,7 @@ namespace MarketIO.MVC.Domain
 
 
         public Brands Brand { get; set; }
-
+        public Categories Category { get; set; }
 
     }
 }

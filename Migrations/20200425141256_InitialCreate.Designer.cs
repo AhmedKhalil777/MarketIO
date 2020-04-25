@@ -4,14 +4,16 @@ using MarketIO.MVC.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MarketIO.MVC.Migrations
 {
     [DbContext(typeof(MarketIODbContext))]
-    partial class MarketIODbContextModelSnapshot : ModelSnapshot
+    [Migration("20200425141256_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -37,25 +39,6 @@ namespace MarketIO.MVC.Migrations
                     b.HasKey("Brand_Id");
 
                     b.ToTable("Brands");
-                });
-
-            modelBuilder.Entity("MarketIO.MVC.Domain.Categories", b =>
-                {
-                    b.Property<int>("Cat_Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Cat_Image")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Cat_Name")
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
-
-                    b.HasKey("Cat_Id");
-
-                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("MarketIO.MVC.Domain.Customers", b =>
@@ -195,9 +178,6 @@ namespace MarketIO.MVC.Migrations
                     b.Property<int?>("Brand_Id")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CategoryCat_Id")
-                        .HasColumnType("int");
-
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(300)")
                         .HasMaxLength(300);
@@ -222,8 +202,6 @@ namespace MarketIO.MVC.Migrations
                     b.HasKey("Product_Id");
 
                     b.HasIndex("Brand_Id");
-
-                    b.HasIndex("CategoryCat_Id");
 
                     b.ToTable("Products");
                 });
@@ -406,10 +384,6 @@ namespace MarketIO.MVC.Migrations
                     b.HasOne("MarketIO.MVC.Domain.Brands", "Brand")
                         .WithMany("Products")
                         .HasForeignKey("Brand_Id");
-
-                    b.HasOne("MarketIO.MVC.Domain.Categories", "Category")
-                        .WithMany("Products")
-                        .HasForeignKey("CategoryCat_Id");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -10,14 +10,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MarketIO.MVC.Migrations
 {
     [DbContext(typeof(MarketIODbContext))]
-    [Migration("20200425034925_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20200425141725_InitialCreate_q")]
+    partial class InitialCreate_q
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "5.0.0-preview.3.20181.2")
+                .HasAnnotation("ProductVersion", "3.1.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -39,6 +39,102 @@ namespace MarketIO.MVC.Migrations
                     b.HasKey("Brand_Id");
 
                     b.ToTable("Brands");
+                });
+
+            modelBuilder.Entity("MarketIO.MVC.Domain.Categories", b =>
+                {
+                    b.Property<int>("Cat_Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Cat_Image")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Cat_Name")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.HasKey("Cat_Id");
+
+                    b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("MarketIO.MVC.Domain.Customers", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("State")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Street")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("Zip_Code")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers");
                 });
 
             modelBuilder.Entity("MarketIO.MVC.Domain.Order_Details", b =>
@@ -69,6 +165,9 @@ namespace MarketIO.MVC.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("CustomersId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<DateTime>("Order_Date")
                         .HasColumnType("datetime2");
 
@@ -83,9 +182,9 @@ namespace MarketIO.MVC.Migrations
 
                     b.HasKey("Order_Id");
 
-                    b.ToTable("Orders");
+                    b.HasIndex("CustomersId");
 
-                    b.HasCheckConstraint("CK_Orders_Status_Enum_Constraint", "[Status] IN(0, 1, 2, 4)");
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("MarketIO.MVC.Domain.Products", b =>
@@ -96,6 +195,9 @@ namespace MarketIO.MVC.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int?>("Brand_Id")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CategoryCat_Id")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
@@ -122,6 +224,8 @@ namespace MarketIO.MVC.Migrations
                     b.HasKey("Product_Id");
 
                     b.HasIndex("Brand_Id");
+
+                    b.HasIndex("CategoryCat_Id");
 
                     b.ToTable("Products");
                 });
@@ -195,71 +299,6 @@ namespace MarketIO.MVC.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetRoleClaims");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.ToTable("AspNetUsers");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -357,11 +396,22 @@ namespace MarketIO.MVC.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("MarketIO.MVC.Domain.Orders", b =>
+                {
+                    b.HasOne("MarketIO.MVC.Domain.Customers", null)
+                        .WithMany("Orders")
+                        .HasForeignKey("CustomersId");
+                });
+
             modelBuilder.Entity("MarketIO.MVC.Domain.Products", b =>
                 {
                     b.HasOne("MarketIO.MVC.Domain.Brands", "Brand")
                         .WithMany("Products")
                         .HasForeignKey("Brand_Id");
+
+                    b.HasOne("MarketIO.MVC.Domain.Categories", "Category")
+                        .WithMany("Products")
+                        .HasForeignKey("CategoryCat_Id");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -375,7 +425,7 @@ namespace MarketIO.MVC.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("MarketIO.MVC.Domain.Customers", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -384,7 +434,7 @@ namespace MarketIO.MVC.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("MarketIO.MVC.Domain.Customers", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -399,7 +449,7 @@ namespace MarketIO.MVC.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("MarketIO.MVC.Domain.Customers", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -408,7 +458,7 @@ namespace MarketIO.MVC.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("MarketIO.MVC.Domain.Customers", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

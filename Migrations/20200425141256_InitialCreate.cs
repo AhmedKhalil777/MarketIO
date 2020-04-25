@@ -11,10 +11,10 @@ namespace MarketIO.MVC.Migrations
                 name: "AspNetRoles",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Id = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(maxLength: 256, nullable: true),
+                    NormalizedName = table.Column<string>(maxLength: 256, nullable: true),
+                    ConcurrencyStamp = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -25,21 +25,25 @@ namespace MarketIO.MVC.Migrations
                 name: "AspNetUsers",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
-                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<string>(nullable: false),
+                    UserName = table.Column<string>(maxLength: 256, nullable: true),
+                    NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
+                    Email = table.Column<string>(maxLength: 256, nullable: true),
+                    NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
+                    EmailConfirmed = table.Column<bool>(nullable: false),
+                    PasswordHash = table.Column<string>(nullable: true),
+                    SecurityStamp = table.Column<string>(nullable: true),
+                    ConcurrencyStamp = table.Column<string>(nullable: true),
+                    PhoneNumber = table.Column<string>(nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
+                    LockoutEnabled = table.Column<bool>(nullable: false),
+                    AccessFailedCount = table.Column<int>(nullable: false),
+                    Street = table.Column<string>(nullable: true),
+                    City = table.Column<string>(nullable: true),
+                    State = table.Column<string>(nullable: true),
+                    Zip_Code = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -50,10 +54,10 @@ namespace MarketIO.MVC.Migrations
                 name: "Brands",
                 columns: table => new
                 {
-                    Brand_Id = table.Column<int>(type: "int", nullable: false)
+                    Brand_Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Brand_Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Brand_Logo = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Brand_Name = table.Column<string>(maxLength: 50, nullable: false),
+                    Brand_Logo = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -61,31 +65,14 @@ namespace MarketIO.MVC.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Orders",
-                columns: table => new
-                {
-                    Order_Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Order_Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Required_Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ShippedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Orders", x => x.Order_Id);
-                    table.CheckConstraint("CK_Orders_Status_Enum_Constraint", "[Status] IN(0, 1, 2, 4)");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    RoleId = table.Column<string>(nullable: false),
+                    ClaimType = table.Column<string>(nullable: true),
+                    ClaimValue = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -102,11 +89,11 @@ namespace MarketIO.MVC.Migrations
                 name: "AspNetUserClaims",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    UserId = table.Column<string>(nullable: false),
+                    ClaimType = table.Column<string>(nullable: true),
+                    ClaimValue = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -123,10 +110,10 @@ namespace MarketIO.MVC.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ProviderKey = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    LoginProvider = table.Column<string>(nullable: false),
+                    ProviderKey = table.Column<string>(nullable: false),
+                    ProviderDisplayName = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -143,8 +130,8 @@ namespace MarketIO.MVC.Migrations
                 name: "AspNetUserRoles",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    UserId = table.Column<string>(nullable: false),
+                    RoleId = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -167,10 +154,10 @@ namespace MarketIO.MVC.Migrations
                 name: "AspNetUserTokens",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    UserId = table.Column<string>(nullable: false),
+                    LoginProvider = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(nullable: false),
+                    Value = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -184,18 +171,41 @@ namespace MarketIO.MVC.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Orders",
+                columns: table => new
+                {
+                    Order_Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Order_Date = table.Column<DateTime>(nullable: false),
+                    Required_Date = table.Column<DateTime>(nullable: false),
+                    ShippedDate = table.Column<DateTime>(nullable: false),
+                    Status = table.Column<int>(nullable: false),
+                    CustomersId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Orders", x => x.Order_Id);
+                    table.ForeignKey(
+                        name: "FK_Orders_AspNetUsers_CustomersId",
+                        column: x => x.CustomersId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Products",
                 columns: table => new
                 {
-                    Product_Id = table.Column<int>(type: "int", nullable: false)
+                    Product_Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    P_Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true),
-                    Image = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Evaluation = table.Column<int>(type: "int", nullable: false),
-                    Price = table.Column<float>(type: "real", nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false),
-                    Brand_Id = table.Column<int>(type: "int", nullable: true)
+                    P_Name = table.Column<string>(maxLength: 100, nullable: false),
+                    Description = table.Column<string>(maxLength: 300, nullable: true),
+                    Image = table.Column<string>(nullable: true),
+                    Evaluation = table.Column<int>(nullable: false),
+                    Price = table.Column<float>(nullable: false),
+                    Quantity = table.Column<int>(nullable: false),
+                    Brand_Id = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -212,10 +222,10 @@ namespace MarketIO.MVC.Migrations
                 name: "Order_Details",
                 columns: table => new
                 {
-                    Order_Id = table.Column<int>(type: "int", nullable: false),
-                    Product_Id = table.Column<int>(type: "int", nullable: false),
-                    Current_Price = table.Column<float>(type: "real", nullable: false),
-                    Amount = table.Column<int>(type: "int", nullable: false)
+                    Order_Id = table.Column<int>(nullable: false),
+                    Product_Id = table.Column<int>(nullable: false),
+                    Current_Price = table.Column<float>(nullable: false),
+                    Amount = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -237,17 +247,17 @@ namespace MarketIO.MVC.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "1", "Admin", "ADMIN" });
+                values: new object[] { "1", null, "Admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "2", "Customer", "CUSTOMER" });
+                values: new object[] { "2", null, "Customer", "CUSTOMER" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "3", "Moderator", "MODERATOR" });
+                values: new object[] { "3", null, "Moderator", "MODERATOR" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -294,6 +304,11 @@ namespace MarketIO.MVC.Migrations
                 column: "Product_Id");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Orders_CustomersId",
+                table: "Orders",
+                column: "CustomersId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Products_Brand_Id",
                 table: "Products",
                 column: "Brand_Id");
@@ -323,13 +338,13 @@ namespace MarketIO.MVC.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
                 name: "Orders");
 
             migrationBuilder.DropTable(
                 name: "Products");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "Brands");

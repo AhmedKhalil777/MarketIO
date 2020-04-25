@@ -18,7 +18,7 @@ namespace MarketIO.MVC.Instrallers
             services.AddDbContext<MarketIODbContext>(options =>
                 options.UseSqlServer(
                     configuration.GetConnectionString("DefaultConnection")));
-            services.AddIdentity<IdentityUser, IdentityRole>(options => {
+            services.AddIdentity<Customers, IdentityRole>(options => {
                 options.Password.RequireDigit = true;
                 options.Password.RequiredLength = 8;
                 options.Password.RequireNonAlphanumeric = true;

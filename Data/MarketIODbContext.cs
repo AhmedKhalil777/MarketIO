@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MarketIO.MVC.Data
 {
-    public class MarketIODbContext : IdentityDbContext<IdentityUser>
+    public class MarketIODbContext : IdentityDbContext<Customers>
     {
         public MarketIODbContext(DbContextOptions<MarketIODbContext> options) : base(options)
         {
@@ -19,7 +19,8 @@ namespace MarketIO.MVC.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-    
+            builder.Entity<Order_Details>()
+                        .HasKey(o => new { o.Order_Id, o.Product_Id });
 
             builder.Entity<IdentityRole>().HasData(
                   new { Id = "1", Name = "Admin", NormalizedName = "ADMIN" },
