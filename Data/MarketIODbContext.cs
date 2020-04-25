@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using MarketIO.MVC.Domain;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -18,6 +19,7 @@ namespace MarketIO.MVC.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+    
 
             builder.Entity<IdentityRole>().HasData(
                   new { Id = "1", Name = "Admin", NormalizedName = "ADMIN" },
@@ -25,9 +27,8 @@ namespace MarketIO.MVC.Data
                   new { Id = "3", Name = "Moderator", NormalizedName = "MODERATOR" }
 
            );
-
-           
-
         }
+
+
     }
 }
