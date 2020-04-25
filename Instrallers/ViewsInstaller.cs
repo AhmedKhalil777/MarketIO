@@ -1,7 +1,9 @@
-﻿using MarketIO.MVC.Domain;
+﻿using AutoMapper;
+using MarketIO.MVC.Domain;
 using MarketIO.MVC.Repositories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace MarketIO.MVC.Instrallers
 {
@@ -18,6 +20,8 @@ namespace MarketIO.MVC.Instrallers
             services.AddScoped<ShoppingCart>(sp => ShoppingCart.GetCart(sp));
             services.AddHttpContextAccessor();
             services.AddSession();
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
     }
 }
