@@ -6,9 +6,9 @@ namespace MarketIO.MVC.Repositories
     public interface IProductRepository
     {
         IEnumerable<Products> AllProducts { get; }
-        //IEnumerable<Products> ProductsOfTheWeek { get; }
-        Products GetPieById(int productId);
-        void CreatePie(Products product);
-        void UpdatePie(Products product);
+        IEnumerable<Products> ProductsOfTheWeek { get; }
+        Products GetProductById(int productId);
+        void CreateProduct(Products product);
+        void UpdateProduct(Products product);
     }
 }

@@ -1,4 +1,5 @@
-﻿using MarketIO.MVC.Repositories;
+﻿using MarketIO.MVC.Domain;
+using MarketIO.MVC.Repositories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -10,6 +11,13 @@ namespace MarketIO.MVC.Instrallers
         {
             services.AddControllersWithViews();
             services.AddTransient<IProductRepository, ProductRepository>();
+            services.AddTransient<IBrandRepository, BrandRepository>();
+            services.AddTransient<IOrderRepository, OrderRepository>();
+            services.AddTransient <ICategoryRepository, CategoryRepository >();
+
+            services.AddScoped<ShoppingCart>(sp => ShoppingCart.GetCart(sp));
+            services.AddHttpContextAccessor();
+            services.AddSession();
         }
     }
 }

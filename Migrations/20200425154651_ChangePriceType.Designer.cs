@@ -4,14 +4,16 @@ using MarketIO.MVC.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MarketIO.MVC.Migrations
 {
     [DbContext(typeof(MarketIODbContext))]
-    partial class MarketIODbContextModelSnapshot : ModelSnapshot
+    [Migration("20200425154651_ChangePriceType")]
+    partial class ChangePriceType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

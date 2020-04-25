@@ -5,7 +5,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Contracts\V1\Responses\" />
+    <Compile Remove="Contracts\V1\Responses\**" />
+    <Content Remove="Contracts\V1\Responses\**" />
+    <EmbeddedResource Remove="Contracts\V1\Responses\**" />
+    <None Remove="Contracts\V1\Responses\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Contracts\V1\Responses\ShoppingCartViewModel.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Contracts\V1\Requests\" />
     <Folder Include="Controllers\V1\MVC\" />
     <Folder Include="Controllers\V1\API\" />

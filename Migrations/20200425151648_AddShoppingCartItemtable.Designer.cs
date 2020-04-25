@@ -4,14 +4,16 @@ using MarketIO.MVC.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MarketIO.MVC.Migrations
 {
     [DbContext(typeof(MarketIODbContext))]
-    partial class MarketIODbContextModelSnapshot : ModelSnapshot
+    [Migration("20200425151648_AddShoppingCartItemtable")]
+    partial class AddShoppingCartItemtable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -146,8 +148,8 @@ namespace MarketIO.MVC.Migrations
                     b.Property<int>("Amount")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Current_Price")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<float>("Current_Price")
+                        .HasColumnType("real");
 
                     b.HasKey("Order_Id", "Product_Id");
 
@@ -165,9 +167,6 @@ namespace MarketIO.MVC.Migrations
 
                     b.Property<string>("CustomersId")
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<decimal>("OrderTotal")
-                        .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime>("Order_Date")
                         .HasColumnType("datetime2");
@@ -219,8 +218,8 @@ namespace MarketIO.MVC.Migrations
                         .HasColumnType("nvarchar(100)")
                         .HasMaxLength(100);
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<float>("Price")
+                        .HasColumnType("real");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
