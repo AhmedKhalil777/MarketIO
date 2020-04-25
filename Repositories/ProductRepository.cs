@@ -14,30 +14,7 @@ namespace MarketIO.MVC.Repositories
         private readonly MarketIODbContext _db;
         public ProductRepository(MarketIODbContext db)
         {
-            _db = db;
+            _db = db; 
         }
-        public IEnumerable<Products> AllProducts => _db.Products.Include(c => c.Brand);
-
-        public IEnumerable<Products> ProductsOfTheWeek => _db.Products.Include(c => c.Brand)
-                        .Include(c => c.Category).Where(p => p.IsProductOfTheWeek);
-
-        public void UpdateProduct(Products product)
-        {
-            _db.Products.Update(product);
-            _db.SaveChanges();
-        }
-
-        public void CreateProduct(Products product)
-        {
-            _db.Products.Add(product);
-            _db.SaveChanges();
-        }
-
-        public Products GetProductById(int productId)
-        {
-            
-            return _db.Products.FirstOrDefault(p => p.Product_Id == productId);
-        }
-
     }
 }

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace MarketIO.MVC.Repositories
 {
-    public class ModeratorRepository
+    public class ModeratorRepository : IModeratorRepository
     {
     }
 }

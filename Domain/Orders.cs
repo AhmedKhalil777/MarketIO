@@ -23,14 +23,14 @@ namespace MarketIO.MVC.Domain
 
         public List<Order_Details> Order_Details { get; set; }
 
-  
 
-        //public float Total_Price()
-        //{
-        //    float TotalPrice = 0;
-        //    Order_Details.ForEach(Order => { TotalPrice += Order.Current_Price * Order.Amount; }) ;
-        //    return TotalPrice;
-        //}
+
+        public float Total_Price()
+        {
+            float TotalPrice = 0;
+            Order_Details.ForEach(Order => { TotalPrice += Order.Current_Price * Order.Amount; });
+            return TotalPrice;
+        }
     }
 
 
