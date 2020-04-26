@@ -16,7 +16,7 @@ namespace MarketIO.MVC.Instrallers
         public void InstallServices(IServiceCollection services, IConfiguration configuration)
         {
             #region JWT Authentication
-            var appSettingsSection = configuration.GetSection("AppSettings");
+            var appSettingsSection = configuration.GetSection("JWTSettings");
             services.Configure<JwtSettings>(appSettingsSection);
 
             var appSettings = appSettingsSection.Get<JwtSettings>();
