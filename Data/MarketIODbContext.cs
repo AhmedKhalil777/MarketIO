@@ -36,6 +36,31 @@ namespace MarketIO.MVC.Data
                   new { Id = "3", Name = "Moderator", NormalizedName = "MODERATOR" }
 
            );
+
+            //seed categories
+            builder.Entity<Categories>().HasData(new Categories { Cat_Id = 1, Cat_Name = "Laptops" });
+            builder.Entity<Categories>().HasData(new Categories { Cat_Id = 2, Cat_Name = "TVS" });
+            builder.Entity<Categories>().HasData(new Categories { Cat_Id = 3, Cat_Name = "Phones" });
+            //seed brands
+            builder.Entity<Brands>().HasData(new Brands { Brand_Id = 1, Brand_Name = "Hp" });
+            builder.Entity<Brands>().HasData(new Brands { Brand_Id = 2, Brand_Name = "Toshiba" });
+            builder.Entity<Brands>().HasData(new Brands { Brand_Id = 3, Brand_Name = "Apple" });
+
+            //Seed products
+            builder.Entity<Products>().HasData(new Products
+            {
+                Product_Id = 1,
+                P_Name = "HP ProBook",
+                Price = 152.95M,
+                Description = "Awesome Laptop!",
+                CategoryId = 1,
+                BrandId = 1,
+                Image = "HP.PNG",
+                InStock = true,
+                IsProductOfTheWeek = true,
+            });
+
+
         }
 
 

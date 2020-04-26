@@ -17,23 +17,33 @@ namespace MarketIO.MVC.Repositories
             _db = db; 
         }
 
-        public IEnumerable<Products> AllProducts => throw new NotImplementedException();
+        public IEnumerable<Products> AllProducts => _db.Products;
 
-        public IEnumerable<Products> ProductsOfTheWeek => throw new NotImplementedException();
+        public IEnumerable<Products> ProductsOfTheWeek => _db.Products.Include(c => c.Brand)
+                        .Include(c => c.Category).Where(p => p.IsProductOfTheWeek && p.Quantity>0);
+
+        public void UpdateProduct(Products product)
+        {
+            _db.Products.Update(product);
+            _db.SaveChanges();
+        }
 
         public void CreateProduct(Products product)
         {
-            throw new NotImplementedException();
+            _db.Products.Add(product);
+            _db.SaveChanges();
         }
 
         public Products GetProductById(int productId)
         {
-            throw new NotImplementedException();
+            return _db.Products.FirstOrDefault(p => p.Product_Id == productId);
         }
 
-        public void UpdateProduct(Products product)
+        public Products DeleteProduct(int productId)
         {
-            throw new NotImplementedException();
+            var deletedProduct = _db.Products.FirstOrDefault(p => p.Product_Id == productId);
+            _db.Products.Remove(deletedProduct);
+            return deletedProduct;
         }
     }
 }

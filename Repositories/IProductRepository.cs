@@ -7,7 +7,7 @@ namespace MarketIO.MVC.Repositories
     {
         IEnumerable<Products> AllProducts { get; }
         IEnumerable<Products> ProductsOfTheWeek { get; }
-        Products GetProductById(int productId);
+        Products DeleteProduct(int productId);
         void CreateProduct(Products product);
         void UpdateProduct(Products product);
     }
