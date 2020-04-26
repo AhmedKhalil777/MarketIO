@@ -47,7 +47,7 @@ namespace MarketIO.MVC.Data
         public MarketIODbContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<MarketIODbContext>();
-            optionsBuilder.UseSqlServer("server=DESKTOP-KVVKP5M\\AHMED;database=MarketIOFirst;Trusted_Connection=true;MultipleActiveResultSets=true");
+            optionsBuilder.UseSqlServer("server=(localdb)\\mssqllocaldb;database=MarketIO;Trusted_Connection=true;MultipleActiveResultSets=true");
 
             return new MarketIODbContext(optionsBuilder.Options);
         }
