@@ -18,6 +18,7 @@
   <ItemGroup>
     <Compile Include="Contracts\V1\Responses\HomeViewModel.cs" />
     <Compile Include="Contracts\V1\Responses\ProductDetailViewModel.cs" />
+    <Compile Include="Contracts\V1\Responses\ProductEditViewModel.cs" />
     <Compile Include="Contracts\V1\Responses\ProductsListViewModel.cs" />
     <Compile Include="Contracts\V1\Responses\ShoppingCartViewModel.cs" />
   </ItemGroup>
