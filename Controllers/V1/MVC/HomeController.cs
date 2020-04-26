@@ -26,5 +26,9 @@ namespace MarketIO.MVC.Controllers.V1.MVC
             };
             return View(homeViewModel);
         }
+        public IActionResult Privacy()
+        {
+            return View();
+        }
     }
 }
