@@ -16,5 +16,24 @@ namespace MarketIO.MVC.Repositories
         {
             _db = db; 
         }
+
+        public IEnumerable<Products> AllProducts => throw new NotImplementedException();
+
+        public IEnumerable<Products> ProductsOfTheWeek => throw new NotImplementedException();
+
+        public void CreateProduct(Products product)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Products GetProductById(int productId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateProduct(Products product)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
