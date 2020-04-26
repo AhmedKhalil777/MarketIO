@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace MarketIO.MVC.Data
 {
     public class MarketIODbContext : IdentityDbContext<Customers>
     {
+
         public MarketIODbContext(DbContextOptions<MarketIODbContext> options) : base(options)
         {
 
@@ -18,16 +20,15 @@ namespace MarketIO.MVC.Data
 
         public DbSet<Products> Products { get; set; }
         public DbSet<Orders> Orders { get; set; }
-        public DbSet<Order_Details> Order_Details { get; set; }
+        public DbSet<ShoppingCartItem> ShoppingCartItems { get; set; }
         public DbSet<Brands> Brands { get; set; }
         public DbSet<Categories> Categories { get; set; }
-        public DbSet<ShoppingCartItem> ShoppingCartItems { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            builder.Entity<Order_Details>()
-                        .HasKey(o => new { o.Order_Id, o.Product_Id });
+            builder.Entity<ShoppingCartItem>()
+                        .HasKey(o => new { o.ShoppingCartId, o.Product_Id });
 
             builder.Entity<IdentityRole>().HasData(
                   new { Id = "1", Name = "Admin", NormalizedName = "ADMIN" },
@@ -38,5 +39,17 @@ namespace MarketIO.MVC.Data
         }
 
 
+    }
+
+
+    public class MarketIOContextFactory : IDesignTimeDbContextFactory<MarketIODbContext>
+    {
+        public MarketIODbContext CreateDbContext(string[] args)
+        {
+            var optionsBuilder = new DbContextOptionsBuilder<MarketIODbContext>();
+            optionsBuilder.UseSqlServer("server=DESKTOP-KVVKP5M\\AHMED;database=MarketIOFirst;Trusted_Connection=true;MultipleActiveResultSets=true");
+
+            return new MarketIODbContext(optionsBuilder.Options);
+        }
     }
 }

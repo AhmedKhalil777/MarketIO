@@ -21,7 +21,7 @@ namespace MarketIO.MVC.Domain
         public decimal OrderTotal { get; set; }
         public OrderStatus Status { get; set; }
 
-        public List<Order_Details> Order_Details { get; set; }
+        public List<ShoppingCartItem> ShoppingCartItems { get; set; }
 
 
 

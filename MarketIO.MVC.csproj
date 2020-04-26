@@ -6,9 +6,13 @@
 
   <ItemGroup>
     <Compile Remove="Contracts\V1\Responses\**" />
+    <Compile Remove="Profiles\**" />
     <Content Remove="Contracts\V1\Responses\**" />
+    <Content Remove="Profiles\**" />
     <EmbeddedResource Remove="Contracts\V1\Responses\**" />
+    <EmbeddedResource Remove="Profiles\**" />
     <None Remove="Contracts\V1\Responses\**" />
+    <None Remove="Profiles\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -20,7 +24,6 @@
     <Folder Include="Contracts\V1\Requests\" />
     <Folder Include="Controllers\V1\MVC\" />
     <Folder Include="Controllers\V1\API\" />
-    <Folder Include="Profiles\" />
   </ItemGroup>
 
   <ItemGroup>

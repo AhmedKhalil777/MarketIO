@@ -25,19 +25,19 @@ namespace MarketIO.MVC.Repositories
             var shoppingCartItems = _shoppingCart.ShoppingCartItems;
             order.OrderTotal = _shoppingCart.GetTotal();
 
-            order.Order_Details = new List<Order_Details>();
+            order.ShoppingCartItems = new List<ShoppingCartItem>();
 
             //adding the order with its details
             foreach (var shoppingCartItem in shoppingCartItems)
             {
-                var orderDetail = new Order_Details
+                var orderDetail = new ShoppingCartItem
                 {
                     Amount = shoppingCartItem.Amount,
                     Product_Id = shoppingCartItem.Product.Product_Id,
                     Current_Price = shoppingCartItem.Product.Price
                 };
 
-                order.Order_Details.Add(orderDetail);
+                order.ShoppingCartItems.Add(orderDetail);
             }
 
             _appDbContext.Orders.Add(order);

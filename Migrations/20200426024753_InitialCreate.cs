@@ -65,6 +65,20 @@ namespace MarketIO.MVC.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Categories",
+                columns: table => new
+                {
+                    Cat_Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Cat_Name = table.Column<string>(maxLength: 50, nullable: true),
+                    Cat_Image = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Categories", x => x.Cat_Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -179,6 +193,7 @@ namespace MarketIO.MVC.Migrations
                     Order_Date = table.Column<DateTime>(nullable: false),
                     Required_Date = table.Column<DateTime>(nullable: false),
                     ShippedDate = table.Column<DateTime>(nullable: false),
+                    OrderTotal = table.Column<decimal>(nullable: false),
                     Status = table.Column<int>(nullable: false),
                     CustomersId = table.Column<string>(nullable: true)
                 },
@@ -203,9 +218,11 @@ namespace MarketIO.MVC.Migrations
                     Description = table.Column<string>(maxLength: 300, nullable: true),
                     Image = table.Column<string>(nullable: true),
                     Evaluation = table.Column<int>(nullable: false),
-                    Price = table.Column<float>(nullable: false),
+                    Price = table.Column<decimal>(nullable: false),
+                    IsProductOfTheWeek = table.Column<bool>(nullable: false),
                     Quantity = table.Column<int>(nullable: false),
-                    Brand_Id = table.Column<int>(nullable: true)
+                    Brand_Id = table.Column<int>(nullable: true),
+                    CategoryCat_Id = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -216,28 +233,35 @@ namespace MarketIO.MVC.Migrations
                         principalTable: "Brands",
                         principalColumn: "Brand_Id",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Products_Categories_CategoryCat_Id",
+                        column: x => x.CategoryCat_Id,
+                        principalTable: "Categories",
+                        principalColumn: "Cat_Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Order_Details",
+                name: "ShoppingCartItems",
                 columns: table => new
                 {
-                    Order_Id = table.Column<int>(nullable: false),
+                    ShoppingCartId = table.Column<int>(nullable: false),
                     Product_Id = table.Column<int>(nullable: false),
-                    Current_Price = table.Column<float>(nullable: false),
-                    Amount = table.Column<int>(nullable: false)
+                    Current_Price = table.Column<decimal>(nullable: false),
+                    Amount = table.Column<int>(nullable: false),
+                    Order_Id = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Order_Details", x => new { x.Order_Id, x.Product_Id });
+                    table.PrimaryKey("PK_ShoppingCartItems", x => new { x.ShoppingCartId, x.Product_Id });
                     table.ForeignKey(
-                        name: "FK_Order_Details_Orders_Order_Id",
+                        name: "FK_ShoppingCartItems_Orders_Order_Id",
                         column: x => x.Order_Id,
                         principalTable: "Orders",
                         principalColumn: "Order_Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Order_Details_Products_Product_Id",
+                        name: "FK_ShoppingCartItems_Products_Product_Id",
                         column: x => x.Product_Id,
                         principalTable: "Products",
                         principalColumn: "Product_Id",
@@ -299,11 +323,6 @@ namespace MarketIO.MVC.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Order_Details_Product_Id",
-                table: "Order_Details",
-                column: "Product_Id");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Orders_CustomersId",
                 table: "Orders",
                 column: "CustomersId");
@@ -312,6 +331,21 @@ namespace MarketIO.MVC.Migrations
                 name: "IX_Products_Brand_Id",
                 table: "Products",
                 column: "Brand_Id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Products_CategoryCat_Id",
+                table: "Products",
+                column: "CategoryCat_Id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ShoppingCartItems_Order_Id",
+                table: "ShoppingCartItems",
+                column: "Order_Id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ShoppingCartItems_Product_Id",
+                table: "ShoppingCartItems",
+                column: "Product_Id");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -332,7 +366,7 @@ namespace MarketIO.MVC.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Order_Details");
+                name: "ShoppingCartItems");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -348,6 +382,9 @@ namespace MarketIO.MVC.Migrations
 
             migrationBuilder.DropTable(
                 name: "Brands");
+
+            migrationBuilder.DropTable(
+                name: "Categories");
         }
     }
 }

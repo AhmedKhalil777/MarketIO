@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MarketIO.MVC.Migrations
 {
     [DbContext(typeof(MarketIODbContext))]
-    [Migration("20200425154651_ChangePriceType")]
-    partial class ChangePriceType
+    [Migration("20200426024753_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -137,27 +137,6 @@ namespace MarketIO.MVC.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("MarketIO.MVC.Domain.Order_Details", b =>
-                {
-                    b.Property<int>("Order_Id")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Product_Id")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Amount")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Current_Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("Order_Id", "Product_Id");
-
-                    b.HasIndex("Product_Id");
-
-                    b.ToTable("Order_Details");
-                });
-
             modelBuilder.Entity("MarketIO.MVC.Domain.Orders", b =>
                 {
                     b.Property<int>("Order_Id")
@@ -238,21 +217,24 @@ namespace MarketIO.MVC.Migrations
 
             modelBuilder.Entity("MarketIO.MVC.Domain.ShoppingCartItem", b =>
                 {
-                    b.Property<int>("ShoppingCartItemId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<int>("ShoppingCartId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Product_Id")
+                        .HasColumnType("int");
 
                     b.Property<int>("Amount")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Product_Id")
+                    b.Property<decimal>("Current_Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int?>("Order_Id")
                         .HasColumnType("int");
 
-                    b.Property<string>("ShoppingCartId")
-                        .HasColumnType("nvarchar(max)");
+                    b.HasKey("ShoppingCartId", "Product_Id");
 
-                    b.HasKey("ShoppingCartItemId");
+                    b.HasIndex("Order_Id");
 
                     b.HasIndex("Product_Id");
 
@@ -410,21 +392,6 @@ namespace MarketIO.MVC.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("MarketIO.MVC.Domain.Order_Details", b =>
-                {
-                    b.HasOne("MarketIO.MVC.Domain.Orders", "Order")
-                        .WithMany("Order_Details")
-                        .HasForeignKey("Order_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MarketIO.MVC.Domain.Products", "Product")
-                        .WithMany()
-                        .HasForeignKey("Product_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("MarketIO.MVC.Domain.Orders", b =>
                 {
                     b.HasOne("MarketIO.MVC.Domain.Customers", null)
@@ -445,9 +412,15 @@ namespace MarketIO.MVC.Migrations
 
             modelBuilder.Entity("MarketIO.MVC.Domain.ShoppingCartItem", b =>
                 {
+                    b.HasOne("MarketIO.MVC.Domain.Orders", "Order")
+                        .WithMany("ShoppingCartItems")
+                        .HasForeignKey("Order_Id");
+
                     b.HasOne("MarketIO.MVC.Domain.Products", "Product")
                         .WithMany()
-                        .HasForeignKey("Product_Id");
+                        .HasForeignKey("Product_Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
