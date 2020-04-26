@@ -50,10 +50,15 @@ namespace MarketIO.MVC.Instrallers
             #endregion
 
             #region CORS Policy
-            services.AddCors(options => {
-                options.AddPolicy("EnableCors", PolicyBuilder => {
-                    PolicyBuilder.AllowAnyOrigin().AllowAnyMethod().AllowAnyMethod().AllowCredentials().Build();
-                });
+            services.AddCors(options =>
+            {
+                options.AddPolicy("EnableCors",
+                                  builder =>
+                                  {
+                                      builder.AllowAnyOrigin()
+                                                          .AllowAnyHeader()
+                                                          .AllowAnyMethod();
+                                  });
             });
             #endregion
 
