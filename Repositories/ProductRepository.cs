@@ -20,7 +20,7 @@ namespace MarketIO.MVC.Repositories
         public IEnumerable<Products> AllProducts => _db.Products;
 
         public IEnumerable<Products> ProductsOfTheWeek => _db.Products.Include(c => c.Brand)
-                        .Include(c => c.Category).Where(p => p.IsProductOfTheWeek && p.Quantity>0);
+                        .Include(c => c.Category).Where(p => p.IsProductOfTheWeek && p.InStock);
 
         public void UpdateProduct(Products product)
         {

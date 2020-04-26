@@ -55,6 +55,7 @@ namespace MarketIO.MVC.Data
                 Description = "Awesome Laptop!",
                 CategoryId = 1,
                 BrandId = 1,
+                Quantity=6,
                 Image = "HP.PNG",
                 InStock = true,
                 IsProductOfTheWeek = true,
