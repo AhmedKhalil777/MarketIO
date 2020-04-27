@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MarketIO.MVC.Contracts.V1;
 using MarketIO.MVC.Contracts.V1.Responses;
 using MarketIO.MVC.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -18,6 +19,7 @@ namespace MarketIO.MVC.Controllers.V1.MVC
         {
             this._productRepository = ProductRepository;
         }
+        [HttpGet(MVCRoutes.Application.Base)]
         public IActionResult Index()
         {
             var homeViewModel = new HomeViewModel()
@@ -26,6 +28,7 @@ namespace MarketIO.MVC.Controllers.V1.MVC
             };
             return View(homeViewModel);
         }
+
         public IActionResult Privacy()
         {
             return View();

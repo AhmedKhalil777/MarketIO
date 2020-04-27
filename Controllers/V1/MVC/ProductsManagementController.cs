@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using MarketIO.MVC.Contracts.V1;
 using MarketIO.MVC.Contracts.V1.Responses;
 using MarketIO.MVC.Repositories;
 using Microsoft.AspNetCore.Hosting;
@@ -30,12 +31,14 @@ namespace MarketIO.MVC.Controllers.V1.MVC
             this.hostingEnvironment = hostingEnvironment;
         }
         // GET: /<controller>/
+        [HttpGet(MVCRoutes.Moderator.Products.GetProducts)]
         public IActionResult Index()
         {
             var products = _productRepository.AllProducts.OrderBy(p => p.P_Name);
             return View(products);
         }
 
+        [HttpGet(MVCRoutes.Moderator.Products.CreateProduct)]
         public IActionResult AddProduct()
         {
             var categories = _categoryRepository.AllCategories;
@@ -51,7 +54,7 @@ namespace MarketIO.MVC.Controllers.V1.MVC
             return View(productEditViewModel);
         }
 
-        [HttpPost]
+        [HttpPost(MVCRoutes.Moderator.Products.CreateProduct)]
         public IActionResult AddProduct(ProductEditViewModel productEditViewModel)
         {
            
@@ -80,7 +83,8 @@ namespace MarketIO.MVC.Controllers.V1.MVC
             return View(productEditViewModel);
         }
 
-        public IActionResult EditProduct(int ProductId)
+        [HttpGet(MVCRoutes.Moderator.Products.UpdateProduct)]
+        public IActionResult EditProduct([FromRoute]int ProductId)
         {
             var categories = _categoryRepository.AllCategories;
             var brands = _brandRepository.AllBrands;
@@ -100,7 +104,8 @@ namespace MarketIO.MVC.Controllers.V1.MVC
             item.Selected = true;
             return View(ProductEditViewModel);
         }
-        [HttpPost]
+
+        [HttpPost(MVCRoutes.Moderator.Products.UpdateProduct)]
         public IActionResult EditProduct(ProductEditViewModel ProductEditViewModel)
         {
             ProductEditViewModel.Product.CategoryId = ProductEditViewModel.CategoryId;
@@ -141,7 +146,7 @@ namespace MarketIO.MVC.Controllers.V1.MVC
             return View(ProductEditViewModel);
         }
 
-        [HttpPost]
+        [HttpPost(MVCRoutes.Moderator.Products.DeleteProduct)]
         public IActionResult DeleteProduct(int ProductId)
         {
             _productRepository.DeleteProduct(ProductId);

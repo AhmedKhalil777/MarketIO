@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MarketIO.MVC.Contracts.V1;
 using MarketIO.MVC.Contracts.V1.Responses;
 using MarketIO.MVC.Domain;
 using MarketIO.MVC.Repositories;
@@ -26,6 +27,7 @@ namespace MarketIO.MVC.Controllers.V1.MVC
             this._brandRepository = brandRepository;
         }
         // GET: /<controller>/
+        
         public IActionResult List(string category="",string brand="")
         {
             IEnumerable<Products> products;
