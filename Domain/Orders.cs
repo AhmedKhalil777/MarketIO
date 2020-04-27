@@ -10,7 +10,7 @@ namespace MarketIO.MVC.Domain
     public class Orders
     {
         [Key]
-        public Guid Order_Id { get; set; } = new Guid();
+        public Guid Order_Id { get; set; } = Guid.NewGuid();
 
         [Required]
         public DateTime Order_Date { get; set; }

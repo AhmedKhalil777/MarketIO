@@ -46,7 +46,7 @@ namespace MarketIO.MVC.Controllers.V1.MVC
 
         public IActionResult CheckoutComplete()
         {
-            ViewBag.CheckoutCompleteMessage = "Thanks for your order. You'll soon enjoy our delicious pies!";
+            ViewBag.CheckoutCompleteMessage = "Thanks for your order. You'll soon get products!";
             return View();
         }
     }

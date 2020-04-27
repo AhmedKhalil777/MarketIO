@@ -10,7 +10,7 @@ namespace MarketIO.MVC.Domain
     public class ShoppingCartItem
     {
         [Key, Column(Order = 1)]
-        public Guid ShoppingCartId { get; set; } = new Guid();
+        public Guid ShoppingCartId { get; set; } = Guid.NewGuid();
 
         [Key, Column(Order = 2)]
         public int Product_Id { get; set; }
