@@ -27,7 +27,6 @@ namespace MarketIO.MVC.Controllers.V1.MVC
             this._brandRepository = brandRepository;
         }
         // GET: /<controller>/
-        
         public IActionResult List(string category="",string brand="")
         {
             IEnumerable<Products> products;

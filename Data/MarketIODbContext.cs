@@ -60,6 +60,19 @@ namespace MarketIO.MVC.Data
                 InStock = true,
                 IsProductOfTheWeek = true,
             });
+            builder.Entity<Products>().HasData(new Products
+            {
+                Product_Id = 2,
+                P_Name = "Mac Book",
+                Price = 252.95M,
+                Description = "Awesome Laptop!",
+                CategoryId = 1,
+                BrandId = 1,
+                Quantity=6,
+                Image = "Mac.JPG",
+                InStock = true,
+                IsProductOfTheWeek = true,
+            });
 
 
         }

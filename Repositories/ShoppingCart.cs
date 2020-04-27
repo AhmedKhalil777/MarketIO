@@ -40,7 +40,7 @@ namespace MarketIO.MVC.Repositories
                 shoppingCartItem = new ShoppingCartItem
                 {
                     Product = product,
-                    ShoppingCartId = int.Parse(ShoppingCartId),
+                    ShoppingCartId =Guid.Parse(ShoppingCartId),
                     Amount = amount
                 };
                 _appDbContext.ShoppingCartItems.Add(shoppingCartItem);

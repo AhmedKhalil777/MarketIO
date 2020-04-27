@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MarketIO.MVC.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class RecreateDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -188,8 +188,7 @@ namespace MarketIO.MVC.Migrations
                 name: "Orders",
                 columns: table => new
                 {
-                    Order_Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Order_Id = table.Column<Guid>(nullable: false),
                     Order_Date = table.Column<DateTime>(nullable: false),
                     Required_Date = table.Column<DateTime>(nullable: false),
                     ShippedDate = table.Column<DateTime>(nullable: false),
@@ -220,36 +219,37 @@ namespace MarketIO.MVC.Migrations
                     Evaluation = table.Column<int>(nullable: false),
                     Price = table.Column<decimal>(nullable: false),
                     IsProductOfTheWeek = table.Column<bool>(nullable: false),
+                    InStock = table.Column<bool>(nullable: false),
                     Quantity = table.Column<int>(nullable: false),
-                    Brand_Id = table.Column<int>(nullable: true),
-                    CategoryCat_Id = table.Column<int>(nullable: true)
+                    BrandId = table.Column<int>(nullable: false),
+                    CategoryId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Products", x => x.Product_Id);
                     table.ForeignKey(
-                        name: "FK_Products_Brands_Brand_Id",
-                        column: x => x.Brand_Id,
+                        name: "FK_Products_Brands_BrandId",
+                        column: x => x.BrandId,
                         principalTable: "Brands",
                         principalColumn: "Brand_Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Products_Categories_CategoryCat_Id",
-                        column: x => x.CategoryCat_Id,
+                        name: "FK_Products_Categories_CategoryId",
+                        column: x => x.CategoryId,
                         principalTable: "Categories",
                         principalColumn: "Cat_Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "ShoppingCartItems",
                 columns: table => new
                 {
-                    ShoppingCartId = table.Column<int>(nullable: false),
+                    ShoppingCartId = table.Column<Guid>(nullable: false),
                     Product_Id = table.Column<int>(nullable: false),
                     Current_Price = table.Column<decimal>(nullable: false),
                     Amount = table.Column<int>(nullable: false),
-                    Order_Id = table.Column<int>(nullable: true)
+                    Order_Id = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -271,17 +271,37 @@ namespace MarketIO.MVC.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "1", null, "Admin", "ADMIN" });
+                values: new object[,]
+                {
+                    { "1", null, "Admin", "ADMIN" },
+                    { "2", null, "Customer", "CUSTOMER" },
+                    { "3", null, "Moderator", "MODERATOR" }
+                });
 
             migrationBuilder.InsertData(
-                table: "AspNetRoles",
-                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "2", null, "Customer", "CUSTOMER" });
+                table: "Brands",
+                columns: new[] { "Brand_Id", "Brand_Logo", "Brand_Name" },
+                values: new object[,]
+                {
+                    { 1, null, "Hp" },
+                    { 2, null, "Toshiba" },
+                    { 3, null, "Apple" }
+                });
 
             migrationBuilder.InsertData(
-                table: "AspNetRoles",
-                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "3", null, "Moderator", "MODERATOR" });
+                table: "Categories",
+                columns: new[] { "Cat_Id", "Cat_Image", "Cat_Name" },
+                values: new object[,]
+                {
+                    { 1, null, "Laptops" },
+                    { 2, null, "TVS" },
+                    { 3, null, "Phones" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Products",
+                columns: new[] { "Product_Id", "BrandId", "CategoryId", "Description", "Evaluation", "Image", "InStock", "IsProductOfTheWeek", "P_Name", "Price", "Quantity" },
+                values: new object[] { 1, 1, 1, "Awesome Laptop!", 0, "HP.PNG", true, true, "HP ProBook", 152.95m, 6 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -328,14 +348,14 @@ namespace MarketIO.MVC.Migrations
                 column: "CustomersId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Products_Brand_Id",
+                name: "IX_Products_BrandId",
                 table: "Products",
-                column: "Brand_Id");
+                column: "BrandId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Products_CategoryCat_Id",
+                name: "IX_Products_CategoryId",
                 table: "Products",
-                column: "CategoryCat_Id");
+                column: "CategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ShoppingCartItems_Order_Id",
