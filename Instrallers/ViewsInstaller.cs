@@ -16,6 +16,7 @@ namespace MarketIO.MVC.Instrallers
             services.AddTransient<IBrandRepository, BrandRepository>();
             services.AddTransient<IOrderRepository, OrderRepository>();
             services.AddTransient <ICategoryRepository, CategoryRepository >();
+            services.AddTransient<IAccountRepository, AccountRepository>();
 
             services.AddScoped<ShoppingCart>(sp => ShoppingCart.GetCart(sp));
             services.AddHttpContextAccessor();
