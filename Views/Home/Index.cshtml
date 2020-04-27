@@ -3,6 +3,15 @@
     ViewData["Title"] = "Home Page";
 }
 
+<form method="get" asp-action="List" asp-controller="Products">
+    <div class="input-group">
+        <input class="form-control" asp-for="SearchQuery" style="width: 800px;">
+        <div class="input-group-append">
+            <button class="btn btn-primary" type="submit">Search</button>
+        </div>
+    </div>
+</form>
+
 <h2>products of the week</h2>
 <h4>Our weekly selection - just for you!</h4>
 

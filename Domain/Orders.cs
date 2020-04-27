@@ -17,6 +17,7 @@ namespace MarketIO.MVC.Domain
 
         public DateTime Required_Date { get; set; }
 
+        [DataType(DataType.Date)]
         public DateTime ShippedDate { get; set; }
         public decimal OrderTotal { get; set; }
         public OrderStatus Status { get; set; }

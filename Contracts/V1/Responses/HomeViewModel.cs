@@ -10,5 +10,6 @@ namespace MarketIO.MVC.Contracts.V1.Responses
     public class HomeViewModel
     {
         public IEnumerable<Products> ProductsOfTheWeak { get; set; }
+        public string SearchQuery { get; set; }
     }
 }

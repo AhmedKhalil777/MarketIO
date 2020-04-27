@@ -1,4 +1,5 @@
-﻿using MarketIO.MVC.Repositories;
+﻿using MarketIO.MVC.Contracts.V1.Requests;
+using MarketIO.MVC.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -8,19 +9,28 @@ using System.Threading.Tasks;
 
 namespace MarketIO.MVC.Components
 {
-    public class CategoryMenu : ViewComponent
+    public class CategoryBrandMenu : ViewComponent
     {
         private readonly ICategoryRepository _categoryRepository;
+        private readonly IBrandRepository _brandRepository;
 
-        public CategoryMenu(ICategoryRepository categoryRepository)
+        public CategoryBrandMenu(ICategoryRepository categoryRepository,IBrandRepository brandRepository)
         {
             this._categoryRepository = categoryRepository;
+            this._brandRepository = brandRepository;
         }
 
         public IViewComponentResult Invoke()
         {
-            var categories = _categoryRepository.AllCategories.OrderBy(c => c.Cat_Name);
-            return View(categories);
+            var CategoryBrandViewModel = new CategoryAndBrandViewModel
+            {
+                Categories = _categoryRepository.AllCategories.OrderBy(c => c.Cat_Name),
+                Brands = _brandRepository.AllBrands.OrderBy(c => c.Brand_Name)
+            };
+
+            return View(CategoryBrandViewModel);
         }
+
+        
     }
 }

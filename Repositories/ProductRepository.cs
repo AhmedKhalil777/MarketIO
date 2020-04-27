@@ -1,5 +1,6 @@
 ﻿using MarketIO.MVC.Data;
 using MarketIO.MVC.Domain;
+using MarketIO.MVC.ResourceParameters;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -25,6 +26,35 @@ namespace MarketIO.MVC.Repositories
         public IEnumerable<Products> AllProducts => _db.Products;
         public IEnumerable<Products> ProductsOfTheWeek => _db.Products.Include(c => c.Brand)
                         .Include(c => c.Category).Where(p => p.IsProductOfTheWeek && p.InStock);
+
+
+        public IEnumerable<Products> GetProducts(ProductResourceParameters productResourceParameters)
+        {
+            if (productResourceParameters == null)
+            {
+                throw new ArgumentNullException(nameof(productResourceParameters));
+            }
+            var collection = _db.Products as IQueryable<Products>;
+            if (!string.IsNullOrWhiteSpace(productResourceParameters.Category))
+            {
+                var mainCategory = productResourceParameters.Category.Trim();
+                collection = collection.Where(a => a.Category.Cat_Name == mainCategory);
+            }
+            if (!string.IsNullOrWhiteSpace(productResourceParameters.Brand))
+            {
+                var mainBrand = productResourceParameters.Brand.Trim();
+                collection = collection.Where(a => a.Brand.Brand_Name == mainBrand);
+            }
+            if (!string.IsNullOrWhiteSpace(productResourceParameters.SearchQuery))
+            {
+                var searchQuery = productResourceParameters.SearchQuery.Trim();
+                collection = collection.Where(c => c.Category.Cat_Name.ToLower().Contains(searchQuery.ToLower())
+                || c.Brand.Brand_Name.ToLower().Contains(searchQuery.ToLower())
+                || c.P_Name.ToLower().Contains(searchQuery.ToLower()));
+            }
+            return collection.ToList();
+        }
+
 
         public void UpdateProduct(Products product)
         {

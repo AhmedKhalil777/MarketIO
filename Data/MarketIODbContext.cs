@@ -72,6 +72,31 @@ namespace MarketIO.MVC.Data
                 Image = "Mac.JPG",
                 InStock = true,
                 IsProductOfTheWeek = true,
+            });builder.Entity<Products>().HasData(new Products
+            {
+                Product_Id = 3,
+                P_Name = "IPhone11 Pro",
+                Price = 175.95M,
+                Description = "Awesome Phone!",
+                CategoryId = 3,
+                BrandId = 3,
+                Quantity=3,
+                Image = "Phone.JPG",
+                InStock = true,
+                IsProductOfTheWeek = true,
+            });
+            builder.Entity<Products>().HasData(new Products
+            {
+                Product_Id = 4,
+                P_Name = "Mac Tv",
+                Price = 202.95M,
+                Description = "Awesome TV!",
+                CategoryId = 2,
+                BrandId = 3,
+                Quantity=6,
+                Image = "TV.JPG",
+                InStock = true,
+                IsProductOfTheWeek = true,
             });
 
 
