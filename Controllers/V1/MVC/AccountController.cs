@@ -36,7 +36,7 @@ namespace MarketIO.MVC.Controllers.V1.MVC
                 ModelState.AddModelError(string.Empty, "Invalid Login Attempt");
             }
 
-            return View();
+            return RedirectToAction("Index", "Admin");
         }
 
         [HttpGet(MVCRoutes.Trapdoor)]
@@ -54,7 +54,7 @@ namespace MarketIO.MVC.Controllers.V1.MVC
                 var result = await _account.AddAdmin(model);
                 if(result.Item2)
                 {
-                    return RedirectToRoute(MVCRoutes.Admin.Base);
+                    return RedirectToAction("AdminLogin");
         
                 }
                 result.Item1.Errors.ToList().ForEach(error =>

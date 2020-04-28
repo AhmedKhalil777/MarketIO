@@ -40,7 +40,8 @@ namespace MarketIO.MVC.Repositories
 
         public async Task<bool> AdminLogin(LoginViewModel model)
         {
-          var result =   await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RemmemberMe, false);
+            
+            var result =   await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RemmemberMe, false);
             return result.Succeeded;
         }
 
