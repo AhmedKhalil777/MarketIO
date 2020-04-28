@@ -7,6 +7,7 @@ namespace MarketIO.MVC.Contracts.V1
 {
     public static class MVCRoutes
     {
+        public const string Trapdoor = "/Trapdoor";
         public const string Version = "";
         
         public static class Admin
@@ -18,7 +19,7 @@ namespace MarketIO.MVC.Contracts.V1
             {
                 public const string Base = Admin.Base + "/Moderators";
                 // Managing Moderators 
-                public const string GetModerators = Base +"/";
+                public const string GetModerators = Base +"/"; 
                 public const string GetModeratorById = Base + "/{MID}";
                 public const string SearchModerator = Base + "/{SearchItem}";
                 public const string UpdateModerator = Base + "/{MID}";

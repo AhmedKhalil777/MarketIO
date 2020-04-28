@@ -12,12 +12,6 @@ namespace MarketIO.MVC.Instrallers
         public void InstallServices(IServiceCollection services, IConfiguration configuration)
         {
             services.AddControllersWithViews();
-            services.AddTransient<IProductRepository, ProductRepository>();
-            services.AddTransient<IBrandRepository, BrandRepository>();
-            services.AddTransient<IOrderRepository, OrderRepository>();
-            services.AddTransient <ICategoryRepository, CategoryRepository >();
-
-            services.AddScoped<ShoppingCart>(sp => ShoppingCart.GetCart(sp));
             services.AddHttpContextAccessor();
             services.AddSession();
 
