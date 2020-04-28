@@ -3,20 +3,20 @@
 
 <div class="col-sm-4 col-lg-4 col-md-4">
     <div class="thumbnail">
-        <img src="~/images/@Model.Image" alt="">
+        <img src="~/images/@Model.Image" style="width:220px;height:200px;" alt="@Model.P_Name">
         <div class="caption">
             <h3 class="pull-right">@Model.Price.ToString("c")</h3>
             <h3>
-                <a asp-controller="Product" asp-action="Details" asp-route-id="@Model.Product_Id">@Model.P_Name</a>
+                <a asp-controller="Products" asp-action="Details" asp-route-id="@Model.Product_Id">@Model.P_Name</a>
             </h3>
             <p>@Model.Description</p>
         </div>
         <div class="addToCart">
             <p class="button">
                 <a class="btn btn-primary"
-                   asp-controller="ShoppingCart"
+                   asp-controller="ShoppingCarts"
                    asp-action="AddToShoppingCart"
-                   asp-route-pieId="@Model.Product_Id">Add to cart</a>
+                   asp-route-productId="@Model.Product_Id">Add to cart</a>
             </p>
         </div>
     </div>

@@ -1,4 +1,5 @@
 ﻿using MarketIO.MVC.Domain;
+using MarketIO.MVC.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;

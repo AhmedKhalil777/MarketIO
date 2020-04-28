@@ -16,7 +16,7 @@ namespace MarketIO.MVC.Instrallers
         public void InstallServices(IServiceCollection services, IConfiguration configuration)
         {
             #region JWT Authentication
-            var appSettingsSection = configuration.GetSection("AppSettings");
+            var appSettingsSection = configuration.GetSection("JWTSettings");
             services.Configure<JwtSettings>(appSettingsSection);
 
             var appSettings = appSettingsSection.Get<JwtSettings>();
@@ -50,10 +50,15 @@ namespace MarketIO.MVC.Instrallers
             #endregion
 
             #region CORS Policy
-            services.AddCors(options => {
-                options.AddPolicy("EnableCors", PolicyBuilder => {
-                    PolicyBuilder.AllowAnyOrigin().AllowAnyMethod().AllowAnyMethod().AllowCredentials().Build();
-                });
+            services.AddCors(options =>
+            {
+                options.AddPolicy("EnableCors",
+                                  builder =>
+                                  {
+                                      builder.AllowAnyOrigin()
+                                                          .AllowAnyHeader()
+                                                          .AllowAnyMethod();
+                                  });
             });
             #endregion
 

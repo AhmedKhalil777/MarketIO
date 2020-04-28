@@ -21,10 +21,17 @@ namespace MarketIO.MVC.Domain
         [Required]
         public decimal Price { get; set; }
         public bool IsProductOfTheWeek { get; set; }
+        public bool InStock { get; set; }
+
         [Required]
         public int Quantity { get; set; }
         public Brands Brand { get; set; }
+        public int BrandId { get; set; }
         public Categories Category { get; set; }
+        public int CategoryId { get; set; }
+
+
+
 
     }
 }
