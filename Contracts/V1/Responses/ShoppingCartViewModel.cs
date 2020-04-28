@@ -1,4 +1,5 @@
 ﻿using MarketIO.MVC.Domain;
+using MarketIO.MVC.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace MarketIO.MVC.Contracts.V1.Responses
 {
     public class ShoppingCartViewModel
     {
-        public ShoppingCartItem ShoppingCart { get; set; }
+        public ShoppingCart ShoppingCart { get; set; }
         public decimal ShoppingCartTotal { get; set; }
 
     }

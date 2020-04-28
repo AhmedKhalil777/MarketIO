@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MarketIO.MVC.Migrations
 {
     [DbContext(typeof(MarketIODbContext))]
-    [Migration("20200426145216_AddInStockCategoryIdBrandIdProps")]
-    partial class AddInStockCategoryIdBrandIdProps
+    [Migration("20200427160822_AddFirstAndLastNameToCustomer")]
+    partial class AddFirstAndLastNameToCustomer
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -116,6 +116,12 @@ namespace MarketIO.MVC.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -173,12 +179,11 @@ namespace MarketIO.MVC.Migrations
 
             modelBuilder.Entity("MarketIO.MVC.Domain.Orders", b =>
                 {
-                    b.Property<int>("Order_Id")
+                    b.Property<Guid>("Order_Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("CustomersId")
+                    b.Property<string>("CustomerId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<decimal>("OrderTotal")
@@ -198,7 +203,7 @@ namespace MarketIO.MVC.Migrations
 
                     b.HasKey("Order_Id");
 
-                    b.HasIndex("CustomersId");
+                    b.HasIndex("CustomerId");
 
                     b.ToTable("Orders");
                 });
@@ -264,14 +269,14 @@ namespace MarketIO.MVC.Migrations
                             IsProductOfTheWeek = true,
                             P_Name = "HP ProBook",
                             Price = 152.95m,
-                            Quantity = 0
+                            Quantity = 6
                         });
                 });
 
             modelBuilder.Entity("MarketIO.MVC.Domain.ShoppingCartItem", b =>
                 {
-                    b.Property<int>("ShoppingCartId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("ShoppingCartId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Product_Id")
                         .HasColumnType("int");
@@ -282,8 +287,8 @@ namespace MarketIO.MVC.Migrations
                     b.Property<decimal>("Current_Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("Order_Id")
-                        .HasColumnType("int");
+                    b.Property<Guid?>("Order_Id")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("ShoppingCartId", "Product_Id");
 
@@ -447,9 +452,9 @@ namespace MarketIO.MVC.Migrations
 
             modelBuilder.Entity("MarketIO.MVC.Domain.Orders", b =>
                 {
-                    b.HasOne("MarketIO.MVC.Domain.Customers", null)
+                    b.HasOne("MarketIO.MVC.Domain.Customers", "Customer")
                         .WithMany("Orders")
-                        .HasForeignKey("CustomersId");
+                        .HasForeignKey("CustomerId");
                 });
 
             modelBuilder.Entity("MarketIO.MVC.Domain.Products", b =>

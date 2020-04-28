@@ -6,9 +6,9 @@ using MarketIO.MVC.Contracts.V1;
 using MarketIO.MVC.Contracts.V1.Responses;
 using MarketIO.MVC.Domain;
 using MarketIO.MVC.Repositories;
+using MarketIO.MVC.ResourceParameters;
 using Microsoft.AspNetCore.Mvc;
 
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace MarketIO.MVC.Controllers.V1.MVC
 {
@@ -27,31 +27,39 @@ namespace MarketIO.MVC.Controllers.V1.MVC
             this._brandRepository = brandRepository;
         }
         // GET: /<controller>/
-        
-        public IActionResult List(string category="",string brand="")
+        public IActionResult List(ProductResourceParameters resourceParameters)
         {
             IEnumerable<Products> products;
-            string currentCategory;
-            string currentBrand="";
+            string title;
+           
 
-            if (!string.IsNullOrEmpty(category) || !string.IsNullOrEmpty(brand))
+            if (!string.IsNullOrEmpty(resourceParameters.Category))
             {
 
-                products = _productRepository.AllProducts.Where(c => c.Category.Cat_Name == category).OrderBy(c => c.P_Name);
-                currentCategory = _categoryRepository.AllCategories.FirstOrDefault(c => c.Cat_Name == category)?.Cat_Name;
-                currentBrand = _brandRepository.AllBrands.FirstOrDefault(c => c.Brand_Name == brand)?.Brand_Name;
-
+                products = _productRepository.GetProducts(resourceParameters);
+                title = _categoryRepository.AllCategories
+                        .FirstOrDefault(c => c.Cat_Name == resourceParameters.Category)?.Cat_Name;
+               
+            }else if (!string.IsNullOrEmpty(resourceParameters.Brand))
+            {
+                products = _productRepository.GetProducts(resourceParameters);
+                title = _brandRepository.AllBrands
+                       .FirstOrDefault(c => c.Brand_Name == resourceParameters.Brand)?.Brand_Name;
+            }
+            else if (!string.IsNullOrEmpty(resourceParameters.SearchQuery))
+            {
+                products = _productRepository.GetProducts(resourceParameters);
+                title = resourceParameters.SearchQuery;
             }
             else
             {
                 products = _productRepository.AllProducts.OrderBy(p => p.Product_Id);
-                currentCategory = "All Products";
+                title = "All Products";
             }
             var productsListViewModel = new ProductsListViewModel
             {
                 Products = products,
-                CurrentCategory = currentCategory,
-                CurrentBrand = currentBrand
+                CurrentCategory = title
             };
             return View(productsListViewModel);
         }
