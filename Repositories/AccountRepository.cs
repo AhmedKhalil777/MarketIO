@@ -1,4 +1,5 @@
 ﻿using MarketIO.MVC.Contracts.V1.Requests;
+using MarketIO.MVC.Contracts.V1.Responses;
 using MarketIO.MVC.Domain;
 using Microsoft.AspNetCore.Identity;
 using System;
@@ -10,6 +11,7 @@ namespace MarketIO.MVC.Repositories
 {
     public class AccountRepository : IAccountRepository
     {
+        public static AdminViewModel Admin;
         private readonly UserManager<Customers> _userManager;
         private readonly SignInManager<Customers> _signInManager;
 
@@ -41,18 +43,33 @@ namespace MarketIO.MVC.Repositories
         public async Task<bool> AdminLogin(LoginViewModel model)
         {
             
-            var result =   await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RemmemberMe, false);
+            var cAdmin = await _userManager.FindByEmailAsync(model.Email);
+            if (cAdmin == null && await _userManager.CheckPasswordAsync(cAdmin ,model.Password))
+            {
+                return false;
+            }
+            await _signInManager.SignOutAsync();
+            var result =   await _signInManager.PasswordSignInAsync(cAdmin.UserName, model.Password, model.RemmemberMe, false);
+            Admin = new AdminViewModel { Email = cAdmin.Email, Image = cAdmin.Image, Name = cAdmin.UserName };
             return result.Succeeded;
         }
-
+        public  async Task SignOut()=> await _signInManager.SignOutAsync();
+        
         public Task<bool> CustomerLogin(LoginViewModel model)
         {
             throw new NotImplementedException();
         }
 
+        public AdminViewModel GetCurrentAdmin() => Admin;
+
         public Task<bool> ModeratorLogin(LoginViewModel model)
         {
             throw new NotImplementedException();
+        }
+
+        public bool IsAdminSignedIn()
+        {
+            return Admin == null;
         }
     }
 }

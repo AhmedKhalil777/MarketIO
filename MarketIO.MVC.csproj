@@ -32,6 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="Contracts\V1\Responses\AdminViewModel.cs" />
     <Compile Include="Contracts\V1\Responses\HomeViewModel.cs" />
     <Compile Include="Contracts\V1\Responses\ProductDetailViewModel.cs" />
     <Compile Include="Contracts\V1\Responses\ProductEditViewModel.cs" />
