@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MarketIO.MVC.Contracts.V1.Responses;
 
 namespace MarketIO.MVC.Data
 {
@@ -101,6 +102,8 @@ namespace MarketIO.MVC.Data
 
 
         }
+
+        public DbSet<MarketIO.MVC.Contracts.V1.Responses.AdminViewModel> AdminViewModel { get; set; }
 
 
     }

@@ -1,4 +1,5 @@
 ﻿
+
 @{
     Layout = null;
 }
@@ -8,9 +9,10 @@
 <html>
 <head>
     <meta charset="utf-8">
-=    <title>AdminPages</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
-    <link href="~/font-awesome/css/all.css" rel="stylesheet"/>
+    =
+    <title>AdminPages</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="~/font-awesome/css/all.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/css/Admin.css" />
 
 </head>
@@ -28,23 +30,7 @@
                         <i class="fas fa-times"></i>
                     </div>
                 </div>
-                <div class="sidebar-header">
-                    <div class="user-pic">
-                        <img class="img-responsive img-rounded" src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg"
-                             alt="User picture">
-                    </div>
-                    <div class="user-info">
-                        <span class="user-name">
-                            Jhon
-                            <strong>Smith</strong>
-                        </span>
-                        <span class="user-role">Administrator</span>
-                        <span class="user-status">
-                            <i class="fa fa-circle"></i>
-                            <span>Online</span>
-                        </span>
-                    </div>
-                </div>
+                @await Html.PartialAsync("_AdminPartial");
                 <!-- sidebar-header  -->
                 <div class="sidebar-search">
                     <div>
@@ -213,19 +199,27 @@
                     <i class="fa fa-cog"></i>
                     <span class="badge-sonar"></span>
                 </a>
-                <a href="#">
+                
+                <a href="@Url.Action("SignOut", "Account")">
+                    
                     <i class="fa fa-power-off"></i>
                 </a>
             </div>
         </nav>
         <!-- sidebar-wrapper  -->
-       @RenderBody()
-        <!-- page-content" -->
-    </div>
-    <!-- page-wrapper -->
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/popper.js/umd/popper.min.js" ></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="~/js/Admin.js"></script>
+        <main class="page-content">
+            <div class="container-fluid">
+                @RenderBody()
+
+                <!-- page-content" -->
+            </div>
+
+        </main>
+        </div>
+        <!-- page-wrapper -->
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/popper.js/umd/popper.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="~/js/Admin.js"></script>
 </body>
 </html>
