@@ -41,12 +41,12 @@ namespace MarketIO.MVC
                 app.UseHsts();
             }
             app.UseCors("EnableCors");
-            app.UseAuthentication();
+            
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

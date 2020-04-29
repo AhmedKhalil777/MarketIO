@@ -4,14 +4,16 @@ using MarketIO.MVC.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MarketIO.MVC.Migrations
 {
     [DbContext(typeof(MarketIODbContext))]
-    partial class MarketIODbContextModelSnapshot : ModelSnapshot
+    [Migration("20200427154444_RecreateDB")]
+    partial class RecreateDB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -114,15 +116,6 @@ namespace MarketIO.MVC.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -184,7 +177,7 @@ namespace MarketIO.MVC.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("CustomerId")
+                    b.Property<string>("CustomersId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<decimal>("OrderTotal")
@@ -204,7 +197,7 @@ namespace MarketIO.MVC.Migrations
 
                     b.HasKey("Order_Id");
 
-                    b.HasIndex("CustomerId");
+                    b.HasIndex("CustomersId");
 
                     b.ToTable("Orders");
                 });
@@ -270,48 +263,6 @@ namespace MarketIO.MVC.Migrations
                             IsProductOfTheWeek = true,
                             P_Name = "HP ProBook",
                             Price = 152.95m,
-                            Quantity = 6
-                        },
-                        new
-                        {
-                            Product_Id = 2,
-                            BrandId = 1,
-                            CategoryId = 1,
-                            Description = "Awesome Laptop!",
-                            Evaluation = 0,
-                            Image = "Mac.JPG",
-                            InStock = true,
-                            IsProductOfTheWeek = true,
-                            P_Name = "Mac Book",
-                            Price = 252.95m,
-                            Quantity = 6
-                        },
-                        new
-                        {
-                            Product_Id = 3,
-                            BrandId = 3,
-                            CategoryId = 3,
-                            Description = "Awesome Phone!",
-                            Evaluation = 0,
-                            Image = "Phone.JPG",
-                            InStock = true,
-                            IsProductOfTheWeek = true,
-                            P_Name = "IPhone11 Pro",
-                            Price = 175.95m,
-                            Quantity = 3
-                        },
-                        new
-                        {
-                            Product_Id = 4,
-                            BrandId = 3,
-                            CategoryId = 2,
-                            Description = "Awesome TV!",
-                            Evaluation = 0,
-                            Image = "TV.JPG",
-                            InStock = true,
-                            IsProductOfTheWeek = true,
-                            P_Name = "Mac Tv",
-                            Price = 202.95m,
                             Quantity = 6
                         });
                 });
@@ -495,9 +446,9 @@ namespace MarketIO.MVC.Migrations
 
             modelBuilder.Entity("MarketIO.MVC.Domain.Orders", b =>
                 {
-                    b.HasOne("MarketIO.MVC.Domain.Customers", "Customer")
+                    b.HasOne("MarketIO.MVC.Domain.Customers", null)
                         .WithMany("Orders")
-                        .HasForeignKey("CustomerId");
+                        .HasForeignKey("CustomersId");
                 });
 
             modelBuilder.Entity("MarketIO.MVC.Domain.Products", b =>

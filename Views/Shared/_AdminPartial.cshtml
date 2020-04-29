@@ -1,0 +1,27 @@
+﻿
+
+@{ 
+    @using MarketIO.MVC.Repositories
+    var Admin = AccountRepository.Admin;
+}
+
+
+<div class="sidebar-header">
+    <div class="user-pic">
+        <img class="img-responsive img-rounded" src= "@Html.DisplayFor(model => Admin.Image)" alt="User picture">
+    </div>
+    <div class="user-info">
+        <span class="user-name">
+            @Html.DisplayFor(model => Admin.Name)
+        </span>
+        <span class="user-name">
+            @Html.DisplayFor(model => Admin.Email)
+        </span>
+        <span class="user-role">Administrator</span>
+        <span class="user-status">
+            <i class="fa fa-circle"></i>
+            <span>Online</span>
+        </span>
+    </div>
+</div>
+

@@ -8,6 +8,9 @@ namespace MarketIO.MVC.Domain
 {
     public class Customers : IdentityUser
     {
+        public string Image { get; set; } = "~/images/DefaultImage.png";
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public string Street { get; set; }
         public string City { get; set; }
         public string State { get; set; }

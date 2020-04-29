@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MarketIO.MVC.Migrations
 {
     [DbContext(typeof(MarketIODbContext))]
-    [Migration("20200426024753_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20200427202652_Seeding")]
+    partial class Seeding
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -39,6 +39,23 @@ namespace MarketIO.MVC.Migrations
                     b.HasKey("Brand_Id");
 
                     b.ToTable("Brands");
+
+                    b.HasData(
+                        new
+                        {
+                            Brand_Id = 1,
+                            Brand_Name = "Hp"
+                        },
+                        new
+                        {
+                            Brand_Id = 2,
+                            Brand_Name = "Toshiba"
+                        },
+                        new
+                        {
+                            Brand_Id = 3,
+                            Brand_Name = "Apple"
+                        });
                 });
 
             modelBuilder.Entity("MarketIO.MVC.Domain.Categories", b =>
@@ -58,6 +75,23 @@ namespace MarketIO.MVC.Migrations
                     b.HasKey("Cat_Id");
 
                     b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            Cat_Id = 1,
+                            Cat_Name = "Laptops"
+                        },
+                        new
+                        {
+                            Cat_Id = 2,
+                            Cat_Name = "TVS"
+                        },
+                        new
+                        {
+                            Cat_Id = 3,
+                            Cat_Name = "Phones"
+                        });
                 });
 
             modelBuilder.Entity("MarketIO.MVC.Domain.Customers", b =>
@@ -81,6 +115,12 @@ namespace MarketIO.MVC.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -139,12 +179,11 @@ namespace MarketIO.MVC.Migrations
 
             modelBuilder.Entity("MarketIO.MVC.Domain.Orders", b =>
                 {
-                    b.Property<int>("Order_Id")
+                    b.Property<Guid>("Order_Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("CustomersId")
+                    b.Property<string>("CustomerId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<decimal>("OrderTotal")
@@ -164,7 +203,7 @@ namespace MarketIO.MVC.Migrations
 
                     b.HasKey("Order_Id");
 
-                    b.HasIndex("CustomersId");
+                    b.HasIndex("CustomerId");
 
                     b.ToTable("Orders");
                 });
@@ -176,10 +215,10 @@ namespace MarketIO.MVC.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("Brand_Id")
+                    b.Property<int>("BrandId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CategoryCat_Id")
+                    b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
@@ -191,6 +230,9 @@ namespace MarketIO.MVC.Migrations
 
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("InStock")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsProductOfTheWeek")
                         .HasColumnType("bit");
@@ -208,17 +250,75 @@ namespace MarketIO.MVC.Migrations
 
                     b.HasKey("Product_Id");
 
-                    b.HasIndex("Brand_Id");
+                    b.HasIndex("BrandId");
 
-                    b.HasIndex("CategoryCat_Id");
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("Products");
+
+                    b.HasData(
+                        new
+                        {
+                            Product_Id = 1,
+                            BrandId = 1,
+                            CategoryId = 1,
+                            Description = "Awesome Laptop!",
+                            Evaluation = 0,
+                            Image = "HP.PNG",
+                            InStock = true,
+                            IsProductOfTheWeek = true,
+                            P_Name = "HP ProBook",
+                            Price = 152.95m,
+                            Quantity = 6
+                        },
+                        new
+                        {
+                            Product_Id = 2,
+                            BrandId = 1,
+                            CategoryId = 1,
+                            Description = "Awesome Laptop!",
+                            Evaluation = 0,
+                            Image = "Mac.JPG",
+                            InStock = true,
+                            IsProductOfTheWeek = true,
+                            P_Name = "Mac Book",
+                            Price = 252.95m,
+                            Quantity = 6
+                        },
+                        new
+                        {
+                            Product_Id = 3,
+                            BrandId = 3,
+                            CategoryId = 3,
+                            Description = "Awesome Phone!",
+                            Evaluation = 0,
+                            Image = "Phone.JPG",
+                            InStock = true,
+                            IsProductOfTheWeek = true,
+                            P_Name = "IPhone11 Pro",
+                            Price = 175.95m,
+                            Quantity = 3
+                        },
+                        new
+                        {
+                            Product_Id = 4,
+                            BrandId = 3,
+                            CategoryId = 2,
+                            Description = "Awesome TV!",
+                            Evaluation = 0,
+                            Image = "TV.JPG",
+                            InStock = true,
+                            IsProductOfTheWeek = true,
+                            P_Name = "Mac Tv",
+                            Price = 202.95m,
+                            Quantity = 6
+                        });
                 });
 
             modelBuilder.Entity("MarketIO.MVC.Domain.ShoppingCartItem", b =>
                 {
-                    b.Property<int>("ShoppingCartId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("ShoppingCartId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Product_Id")
                         .HasColumnType("int");
@@ -229,8 +329,8 @@ namespace MarketIO.MVC.Migrations
                     b.Property<decimal>("Current_Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("Order_Id")
-                        .HasColumnType("int");
+                    b.Property<Guid?>("Order_Id")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("ShoppingCartId", "Product_Id");
 
@@ -394,20 +494,24 @@ namespace MarketIO.MVC.Migrations
 
             modelBuilder.Entity("MarketIO.MVC.Domain.Orders", b =>
                 {
-                    b.HasOne("MarketIO.MVC.Domain.Customers", null)
+                    b.HasOne("MarketIO.MVC.Domain.Customers", "Customer")
                         .WithMany("Orders")
-                        .HasForeignKey("CustomersId");
+                        .HasForeignKey("CustomerId");
                 });
 
             modelBuilder.Entity("MarketIO.MVC.Domain.Products", b =>
                 {
                     b.HasOne("MarketIO.MVC.Domain.Brands", "Brand")
                         .WithMany("Products")
-                        .HasForeignKey("Brand_Id");
+                        .HasForeignKey("BrandId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("MarketIO.MVC.Domain.Categories", "Category")
                         .WithMany("Products")
-                        .HasForeignKey("CategoryCat_Id");
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("MarketIO.MVC.Domain.ShoppingCartItem", b =>

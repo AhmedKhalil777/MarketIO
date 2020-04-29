@@ -1,4 +1,5 @@
 ﻿using MarketIO.MVC.Helpers;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,17 +24,22 @@ namespace MarketIO.MVC.Instrallers
             var key = Encoding.ASCII.GetBytes(appSettings.Secret);
 
             // Authintication Middleware
-            services.AddAuthentication(o =>
-            {
-                o.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                o.DefaultSignInScheme = JwtBearerDefaults.AuthenticationScheme;
-                o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            }
-            ).AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
-            {
-
-                options.TokenValidationParameters = new TokenValidationParameters
+            services.AddAuthentication( CookieAuthenticationDefaults.AuthenticationScheme
+            //   o =>
+            //{
+               
+            //    //o.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            //    //o.DefaultSignInScheme = JwtBearerDefaults.AuthenticationScheme;
+            //    //o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            //}
+            ).AddCookie(cfg => {
+                cfg.SlidingExpiration = true;
+                cfg.LoginPath = "/Account/Login";
+            })
+              .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
                 {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
 
                     ValidateIssuerSigningKey = true,
                     ValidateIssuer = true,
@@ -44,8 +50,8 @@ namespace MarketIO.MVC.Instrallers
                     IssuerSigningKey = new SymmetricSecurityKey(key)
 
 
-                };
-            });
+                             };
+             });
 
             #endregion
 

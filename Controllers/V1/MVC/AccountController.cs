@@ -4,7 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using MarketIO.MVC.Contracts.V1;
 using MarketIO.MVC.Contracts.V1.Requests;
+using MarketIO.MVC.Contracts.V1.Responses;
 using MarketIO.MVC.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MarketIO.MVC.Controllers.V1.MVC
@@ -19,6 +21,7 @@ namespace MarketIO.MVC.Controllers.V1.MVC
         [HttpGet(MVCRoutes.Admin.Base)]
         public IActionResult AdminLogin()
         {
+            
             return View();
         }
 
@@ -31,12 +34,15 @@ namespace MarketIO.MVC.Controllers.V1.MVC
 
                 if (result)
                 {
-                    return Ok("Succedded");
+                    return RedirectToAction("Index", "Admin");
                 }
                 ModelState.AddModelError(string.Empty, "Invalid Login Attempt");
-            }
+                
 
-            return RedirectToAction("Index", "Admin");
+            }
+            return View();
+            
+            
         }
 
         [HttpGet(MVCRoutes.Trapdoor)]
@@ -44,7 +50,15 @@ namespace MarketIO.MVC.Controllers.V1.MVC
         {
             return View();
         }
-        
+
+        [HttpGet(MVCRoutes.Signout)]
+        public async Task<IActionResult> Signout() 
+        {
+            await _account.SignOut();
+            return RedirectToAction("Index", "Home");
+                
+        }
+
 
         [HttpPost(MVCRoutes.Trapdoor)]
         public async Task<IActionResult> Trapdoor(RegisterViewModel model)
@@ -67,6 +81,19 @@ namespace MarketIO.MVC.Controllers.V1.MVC
            
 
         }
-        
+        [Authorize(Roles = "Admin")]
+        [HttpGet(MVCRoutes.Admin.EditAdmin)]
+        public  IActionResult EditAdmin() 
+        {
+           AdminViewModel Admin = _account.GetCurrentAdmin();
+           return View(Admin); 
+        }
+        [Authorize(Roles = "Admin")]
+        [HttpPost(MVCRoutes.Admin.EditAdmin)]
+        public IActionResult EditAdmin(EditAdminViewModel model)
+        {
+            return View();
+        }
+
     }
 }

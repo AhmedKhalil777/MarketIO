@@ -8,12 +8,14 @@ namespace MarketIO.MVC.Contracts.V1
     public static class MVCRoutes
     {
         public const string Trapdoor = "/Trapdoor";
+        public const string Signout = "/Signout";
         public const string Version = "";
-        
+
         public static class Admin
         {
-            public const string Base = Version+ "/Admin";
-            public const string AdminHome = Base  + "/Home";
+            public const string Base = Version + "/Admin";
+            public const string AdminHome = Base + "/Home";
+            public const string EditAdmin = AdminHome + "/Edit";
 
             public static class Moderators
             {
@@ -75,11 +77,11 @@ namespace MarketIO.MVC.Contracts.V1
             {
                 
                 public const string Base = Moderator.Base + "/Products";
-                public const string GetProducts = Base +"/";
+                public const string GetProducts = Base + "/";
                 public const string GetProductById = Base + "/{PID}";
-                public const string UpdateProduct = Base + "/Update/{PID}";
+                public const string UpdateProduct = Base + "/EditProduct/{ProductId}";
                 public const string CreateProduct = Base + "/Create";
-                public const string DeleteProduct = Base + "/Delete/{PID}";
+                public const string DeleteProduct = Base + "/Delete/{ProductId}";
             }
 
 
