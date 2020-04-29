@@ -1,4 +1,5 @@
 ﻿using MarketIO.MVC.Contracts.V1.Requests;
+using MarketIO.MVC.Contracts.V1.Responses;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -13,5 +14,8 @@ namespace MarketIO.MVC.Repositories
         Task<bool> ModeratorLogin(LoginViewModel model);
         Task<bool> CustomerLogin(LoginViewModel model);
         Task<(IdentityResult, bool)> AddAdmin(RegisterViewModel model);
+        AdminViewModel GetCurrentAdmin();
+        Task SignOut();
+        bool IsAdminSignedIn();
     }
 }
