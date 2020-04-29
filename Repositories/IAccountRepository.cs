@@ -1,6 +1,7 @@
 ﻿using MarketIO.MVC.Contracts.V1.Requests;
 using MarketIO.MVC.Contracts.V1.Responses;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Razor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,6 @@ namespace MarketIO.MVC.Repositories
         Task<(IdentityResult, bool)> AddAdmin(RegisterViewModel model);
         AdminViewModel GetCurrentAdmin();
         Task SignOut();
-        bool IsAdminSignedIn();
+        bool IsAdminSignedIn(RazorPageBase @base);
     }
 }

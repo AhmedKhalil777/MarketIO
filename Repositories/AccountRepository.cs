@@ -2,6 +2,7 @@
 using MarketIO.MVC.Contracts.V1.Responses;
 using MarketIO.MVC.Domain;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Razor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -67,9 +68,9 @@ namespace MarketIO.MVC.Repositories
             throw new NotImplementedException();
         }
 
-        public bool IsAdminSignedIn()
+        public bool IsAdminSignedIn(RazorPageBase Base)
         {
-            return Admin == null;
+            return _signInManager.IsSignedIn(Base.User);
         }
     }
 }

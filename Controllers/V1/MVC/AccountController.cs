@@ -6,6 +6,7 @@ using MarketIO.MVC.Contracts.V1;
 using MarketIO.MVC.Contracts.V1.Requests;
 using MarketIO.MVC.Contracts.V1.Responses;
 using MarketIO.MVC.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MarketIO.MVC.Controllers.V1.MVC
@@ -80,14 +81,14 @@ namespace MarketIO.MVC.Controllers.V1.MVC
            
 
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpGet(MVCRoutes.Admin.EditAdmin)]
         public  IActionResult EditAdmin() 
         {
            AdminViewModel Admin = _account.GetCurrentAdmin();
            return View(Admin); 
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpPost(MVCRoutes.Admin.EditAdmin)]
         public IActionResult EditAdmin(EditAdminViewModel model)
         {
