@@ -10,5 +10,10 @@
       "library": "popper.js@2.3.3",
       "destination": "wwwroot/lib/popper.js/"
     }
-  ]
+  ,
+{
+  "library": "jquery@3.5.0",
+  "destination": "wwwroot/lib/jquery/"
+}
+]
 }
