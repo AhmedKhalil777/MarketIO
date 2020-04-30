@@ -44,11 +44,11 @@ namespace MarketIO.MVC
             
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseSession();
+
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
-
+            app.UseSession();
             app.UseEndpoints(endpoints =>
             {
                 

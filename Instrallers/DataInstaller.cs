@@ -15,6 +15,17 @@ namespace MarketIO.MVC.Instrallers
     {
         public void InstallServices(IServiceCollection services, IConfiguration configuration)
         {
+            #region Caching
+            services.AddDistributedMemoryCache();
+
+            services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromHours(10);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+            #endregion
+
+            #region Database 
             services.AddDbContext<MarketIODbContext>(options =>
                 options.UseSqlServer(
                     configuration.GetConnectionString("DefaultConnection")));
@@ -32,7 +43,7 @@ namespace MarketIO.MVC.Instrallers
 
 
             }).AddEntityFrameworkStores<MarketIODbContext>().AddDefaultTokenProviders();
-
+            #endregion
         }
     }
 }
