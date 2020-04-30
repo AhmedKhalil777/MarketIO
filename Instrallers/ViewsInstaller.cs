@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
-using MarketIO.MVC.Domain;
-using MarketIO.MVC.Repositories;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -11,7 +10,7 @@ namespace MarketIO.MVC.Instrallers
     {
         public void InstallServices(IServiceCollection services, IConfiguration configuration)
         {
-            services.AddControllersWithViews();
+            services.AddControllersWithViews(o=> o.Filters.Add(new AuthorizeFilter()));
             services.AddHttpContextAccessor();
             services.AddSession();
 

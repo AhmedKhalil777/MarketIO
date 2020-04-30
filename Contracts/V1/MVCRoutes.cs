@@ -9,6 +9,7 @@ namespace MarketIO.MVC.Contracts.V1
     {
         public const string Trapdoor = "/Trapdoor";
         public const string Signout = "/Signout";
+        public const string ChangeImage = "/Image";
         public const string Version = "";
 
         public static class Admin

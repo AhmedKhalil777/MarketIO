@@ -7,6 +7,7 @@ using MarketIO.MVC.Contracts.V1.Requests;
 using MarketIO.MVC.Contracts.V1.Responses;
 using MarketIO.MVC.Repositories;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MarketIO.MVC.Controllers.V1.MVC
@@ -18,6 +19,7 @@ namespace MarketIO.MVC.Controllers.V1.MVC
         {
             _account = account;
         }
+        [AllowAnonymous]
         [HttpGet(MVCRoutes.Admin.Base)]
         public IActionResult AdminLogin()
         {
@@ -25,6 +27,7 @@ namespace MarketIO.MVC.Controllers.V1.MVC
             return View();
         }
 
+        [AllowAnonymous]
         [HttpPost(MVCRoutes.Admin.Base)]
         public async Task<IActionResult> AdminLogin(LoginViewModel model)
         {
@@ -32,8 +35,9 @@ namespace MarketIO.MVC.Controllers.V1.MVC
             {
                 var result = await _account.AdminLogin(model);
 
-                if (result)
+                if (result.Item2)
                 {
+                    HttpContext.Session.SetString("AdminId", result.Item1);
                     return RedirectToAction("Index", "Admin");
                 }
                 ModelState.AddModelError(string.Empty, "Invalid Login Attempt");
@@ -63,6 +67,8 @@ namespace MarketIO.MVC.Controllers.V1.MVC
         [HttpPost(MVCRoutes.Trapdoor)]
         public async Task<IActionResult> Trapdoor(RegisterViewModel model)
         {
+            
+
             if (ModelState.IsValid)
             {
                 var result = await _account.AddAdmin(model);
@@ -93,6 +99,18 @@ namespace MarketIO.MVC.Controllers.V1.MVC
         public IActionResult EditAdmin(EditAdminViewModel model)
         {
             return View();
+        }
+
+
+        [HttpPost(MVCRoutes.ChangeImage)]
+        public async Task<IActionResult> ChangeImage(IFormFile imagefile)
+        {
+            var result = await _account.ChangeImage(HttpContext.Session.GetString("AdminId"), imagefile);
+            if (result)
+            {
+                return Ok(new { status = 1 ,  Message ="Image Changed Successfuly" });
+            }
+            return BadRequest(new { status = 0, Message = "Error of Uploading Retry another time" });
         }
 
     }
