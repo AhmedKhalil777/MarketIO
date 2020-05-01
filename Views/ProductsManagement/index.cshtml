@@ -29,7 +29,7 @@ else
         {
             <tr>
                 <td>@Product.Product_Id</td>
-                <td><img src="~/images/@Product.Image"style="width:45px;" /></td>
+                <td><img src="~/images/@Product.Image"style="width:45px;" asp-append-version="true" /></td>
                 <td>@Product.P_Name</td>
                 <td><input type="checkbox" asp-for="@Product.InStock" />
                 <td>@Product.Price</td> 
