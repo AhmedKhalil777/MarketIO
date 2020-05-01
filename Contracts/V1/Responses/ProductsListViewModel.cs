@@ -12,6 +12,7 @@ namespace MarketIO.MVC.Contracts.V1.Responses
         public IEnumerable<Products> Products{ get; set; }
         public string CurrentCategory { get; set; }
         public string CurrentBrand{ get; set; }
+        public string SearchQuery { get; set; }
 
 
     }

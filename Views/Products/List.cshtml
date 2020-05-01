@@ -1,6 +1,15 @@
 ﻿@model ProductsListViewModel
 
 
+<form method="get" asp-action="List" asp-controller="Products">
+    <div class="input-group">
+        <input class="form-control" asp-for="SearchQuery" style="width: 800px;">
+        <div class="input-group-append">
+            <button class="btn btn-primary" type="submit">Search</button>
+        </div>
+    </div>
+</form>
+
 <h1>@Model.CurrentCategory</h1>
 
 <div class="row">
