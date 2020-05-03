@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MarketIO.MVC", "MarketIO.MVC.csproj", "{1DD45FFB-2271-42A8-9958-9CE4A2442BFF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarketIO.Test", "MarketIO.Test\MarketIO.Test.csproj", "{3AD88B3D-5A54-471C-B363-1EEB041E9A8C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{1DD45FFB-2271-42A8-9958-9CE4A2442BFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1DD45FFB-2271-42A8-9958-9CE4A2442BFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1DD45FFB-2271-42A8-9958-9CE4A2442BFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3AD88B3D-5A54-471C-B363-1EEB041E9A8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AD88B3D-5A54-471C-B363-1EEB041E9A8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3AD88B3D-5A54-471C-B363-1EEB041E9A8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3AD88B3D-5A54-471C-B363-1EEB041E9A8C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
