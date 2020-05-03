@@ -1,5 +1,5 @@
-﻿using MarketIO.MVC.Data;
-using MarketIO.MVC.Domain;
+﻿using MarketIO.DAL.Data;
+using MarketIO.DAL.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;

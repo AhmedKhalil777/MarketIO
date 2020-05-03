@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MarketIO.MVC.Domain
+namespace MarketIO.DAL.Domain
 {
     public class Orders
     {
