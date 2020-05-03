@@ -4,15 +4,14 @@ on: [push]
 
 jobs:
   build:
-
+    
     runs-on: ubuntu-latest
-
+    run: cd MarketIO.MVC
     steps:
     - uses: actions/checkout@v2
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.101
-    - run: cd MarketIO.MVC
     - name: Build with dotnet
       run: dotnet build --configuration Release
