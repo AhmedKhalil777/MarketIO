@@ -8,8 +8,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - run: cd MarketIO.MVC
     - uses: actions/checkout@v2
+    - run: cd MarketIO.MVC
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
