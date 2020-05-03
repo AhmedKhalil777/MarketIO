@@ -13,5 +13,6 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.101
+    - run: cd MarketIO.MVC
     - name: Build with dotnet
       run: dotnet build --configuration Release
