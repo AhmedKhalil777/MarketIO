@@ -1,5 +1,5 @@
-﻿using MarketIO.MVC.Data;
-using MarketIO.MVC.Domain;
+﻿using MarketIO.DAL.Data;
+using MarketIO.DAL.Domain;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;

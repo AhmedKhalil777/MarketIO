@@ -1,6 +1,5 @@
 ﻿using MarketIO.MVC.Contracts.V1.Requests;
 using MarketIO.MVC.Contracts.V1.Responses;
-using MarketIO.MVC.Domain;
 using Microsoft.AspNetCore.Http;
 using MarketIO.MVC.Caching;
 using Microsoft.AspNetCore.Http.Extensions;
@@ -12,7 +11,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-
+using MarketIO.DAL.Domain;
 
 namespace MarketIO.MVC.Repositories
 {

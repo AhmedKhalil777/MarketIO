@@ -1,4 +1,4 @@
-﻿namespace MarketIO.MVC.Domain
+﻿namespace MarketIO.DAL.Domain
 {
     public enum OrderStatus
     {

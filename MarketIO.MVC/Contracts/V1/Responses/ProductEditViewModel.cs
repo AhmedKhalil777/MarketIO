@@ -1,4 +1,4 @@
-﻿using MarketIO.MVC.Domain;
+﻿using MarketIO.DAL.Domain;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;

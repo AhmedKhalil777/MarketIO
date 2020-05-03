@@ -1,4 +1,4 @@
-﻿using MarketIO.MVC.Domain;
+﻿using MarketIO.DAL.Domain;
 using MarketIO.MVC.ResourceParameters;
 using System.Collections.Generic;
 

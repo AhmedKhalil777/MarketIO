@@ -1,4 +1,5 @@
-﻿using MarketIO.MVC.Domain;
+﻿using MarketIO.DAL.Domain;
+
 
 namespace MarketIO.MVC.Repositories
 {

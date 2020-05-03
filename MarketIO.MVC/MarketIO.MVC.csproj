@@ -17,21 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20200426024753_InitialCreate.cs" />
-    <Compile Remove="Migrations\20200426024753_InitialCreate.Designer.cs" />
-    <Compile Remove="Migrations\20200426145216_AddInStockCategoryIdBrandIdProps.cs" />
-    <Compile Remove="Migrations\20200426145216_AddInStockCategoryIdBrandIdProps.Designer.cs" />
-    <Compile Remove="Migrations\20200427152136_ChangeShoppingCartIdToGUID.cs" />
-    <Compile Remove="Migrations\20200427152136_ChangeShoppingCartIdToGUID.Designer.cs" />
-    <Compile Remove="Migrations\20200427152619_ChangeShoppingCartIdAndOrderToGUID.cs" />
-    <Compile Remove="Migrations\20200427152619_ChangeShoppingCartIdAndOrderToGUID.Designer.cs" />
-    <Compile Remove="Migrations\20200427153956_ChangeShoppingCartIdAndOrderToGUID.cs" />
-    <Compile Remove="Migrations\20200427153956_ChangeShoppingCartIdAndOrderToGUID.Designer.cs" />
-    <Compile Remove="Migrations\20200427154324_RecreateDB.cs" />
-    <Compile Remove="Migrations\20200427154324_RecreateDB.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Include="Contracts\V1\Responses\AdminViewModel.cs" />
     <Compile Include="Contracts\V1\Responses\HomeViewModel.cs" />
     <Compile Include="Contracts\V1\Responses\ProductDetailViewModel.cs" />
@@ -60,6 +45,10 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.2" />
     <PackageReference Include="NLog.Web.AspNetCore" Version="4.9.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MarketIO.DAL\MarketIO.DAL\MarketIO.DAL.csproj" />
   </ItemGroup>
 
 

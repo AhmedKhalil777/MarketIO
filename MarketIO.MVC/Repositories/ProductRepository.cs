@@ -1,5 +1,5 @@
-﻿using MarketIO.MVC.Data;
-using MarketIO.MVC.Domain;
+﻿using MarketIO.DAL.Data;
+using MarketIO.DAL.Domain;
 using MarketIO.MVC.ResourceParameters;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;

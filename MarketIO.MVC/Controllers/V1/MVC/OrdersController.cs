@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using MarketIO.MVC.Domain;
+using MarketIO.DAL.Domain;
 using MarketIO.MVC.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
