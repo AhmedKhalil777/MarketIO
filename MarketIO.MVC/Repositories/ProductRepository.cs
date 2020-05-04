@@ -1,6 +1,6 @@
 ﻿using MarketIO.DAL.Data;
 using MarketIO.DAL.Domain;
-using MarketIO.MVC.ResourceParameters;
+using MarketIO.DAL.Repositories;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -28,26 +28,26 @@ namespace MarketIO.MVC.Repositories
                         .Include(c => c.Category).Where(p => p.IsProductOfTheWeek && p.InStock);
 
 
-        public IEnumerable<Products> GetProducts(ProductResourceParameters productResourceParameters)
+        public IEnumerable<Products> GetProducts(string Category, string Brand, string SearchQuery)
         {
-            if (productResourceParameters == null)
+            if (Category == null && Brand ==null && SearchQuery == null )
             {
-                throw new ArgumentNullException(nameof(productResourceParameters));
+                throw new ArgumentNullException("Resouce Parmater Error");
             }
             var collection = _db.Products as IQueryable<Products>;
-            if (!string.IsNullOrWhiteSpace(productResourceParameters.Category))
+            if (!string.IsNullOrWhiteSpace(Category))
             {
-                var mainCategory = productResourceParameters.Category.Trim();
+                var mainCategory = Category.Trim();
                 collection = collection.Where(a => a.Category.Cat_Name == mainCategory);
             }
-            if (!string.IsNullOrWhiteSpace(productResourceParameters.Brand))
+            if (!string.IsNullOrWhiteSpace(Brand))
             {
-                var mainBrand = productResourceParameters.Brand.Trim();
+                var mainBrand =Brand.Trim();
                 collection = collection.Where(a => a.Brand.Brand_Name == mainBrand);
             }
-            if (!string.IsNullOrWhiteSpace(productResourceParameters.SearchQuery))
+            if (!string.IsNullOrWhiteSpace(SearchQuery))
             {
-                var searchQuery = productResourceParameters.SearchQuery.Trim();
+                var searchQuery = SearchQuery.Trim();
                 collection = collection.Where(c => c.Category.Cat_Name.ToLower().Contains(searchQuery.ToLower())
                 || c.Brand.Brand_Name.ToLower().Contains(searchQuery.ToLower())
                 || c.P_Name.ToLower().Contains(searchQuery.ToLower()));

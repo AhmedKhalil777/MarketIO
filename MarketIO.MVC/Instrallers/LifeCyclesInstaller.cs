@@ -1,5 +1,6 @@
-﻿using MarketIO.MVC.Repositories;
-using Microsoft.AspNetCore.Http;
+﻿using MarketIO.DAL.Repositories;
+using MarketIO.MVC.FilesHosting;
+using MarketIO.MVC.Repositories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -14,7 +15,7 @@ namespace MarketIO.MVC.Instrallers
             services.AddTransient<IOrderRepository, OrderRepository>();
             services.AddTransient<ICategoryRepository, CategoryRepository>();
             services.AddTransient<IAccountRepository, AccountRepository>();
-       
+            services.AddTransient<IFileUploader, FileUploader>();
             services.AddScoped<ShoppingCart>(sp => ShoppingCart.GetCart(sp));
         }
     }

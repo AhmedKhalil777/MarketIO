@@ -1,4 +1,4 @@
-﻿namespace MarketIO.MVC.Repositories
+﻿namespace MarketIO.DAL.Repositories
 {
     public interface ICustomerRepository
     {

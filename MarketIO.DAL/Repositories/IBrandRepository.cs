@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MarketIO.MVC.Repositories
+namespace MarketIO.DAL.Repositories
 {
     public interface IBrandRepository
     {

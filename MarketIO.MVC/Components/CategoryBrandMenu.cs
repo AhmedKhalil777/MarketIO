@@ -1,5 +1,5 @@
-﻿using MarketIO.MVC.Contracts.V1.Requests;
-using MarketIO.MVC.Repositories;
+﻿using MarketIO.DAL.Repositories;
+using MarketIO.MVC.Contracts.V1.Requests;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;

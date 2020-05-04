@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MarketIO.DAL.Domain;
+using MarketIO.DAL.Repositories;
 using MarketIO.MVC.Contracts.V1;
+using MarketIO.MVC.Contracts.V1.Requests.ResourceParameters;
 using MarketIO.MVC.Contracts.V1.Responses;
 using MarketIO.MVC.Repositories;
-using MarketIO.MVC.ResourceParameters;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -27,29 +28,29 @@ namespace MarketIO.MVC.Controllers.V1.MVC
             this._brandRepository = brandRepository;
         }
         // GET: /<controller>/
-        public IActionResult List(ProductResourceParameters resourceParameters)
+        public IActionResult List(ProductResourceParameters RP)
         {
             IEnumerable<Products> products;
             string title;
            
 
-            if (!string.IsNullOrEmpty(resourceParameters.Category))
+            if (!string.IsNullOrEmpty(RP.Category))
             {
 
-                products = _productRepository.GetProducts(resourceParameters);
+                products = _productRepository.GetProducts(RP.Category, RP.Brand , RP.SearchQuery);
                 title = _categoryRepository.AllCategories
-                        .FirstOrDefault(c => c.Cat_Name == resourceParameters.Category)?.Cat_Name;
+                        .FirstOrDefault(c => c.Cat_Name == RP.Category)?.Cat_Name;
                
-            }else if (!string.IsNullOrEmpty(resourceParameters.Brand))
+            }else if (!string.IsNullOrEmpty(RP.Brand))
             {
-                products = _productRepository.GetProducts(resourceParameters);
+                products = _productRepository.GetProducts(RP.Category, RP.Brand, RP.SearchQuery);
                 title = _brandRepository.AllBrands
-                       .FirstOrDefault(c => c.Brand_Name == resourceParameters.Brand)?.Brand_Name;
+                       .FirstOrDefault(c => c.Brand_Name == RP.Brand)?.Brand_Name;
             }
-            else if (!string.IsNullOrEmpty(resourceParameters.SearchQuery))
+            else if (!string.IsNullOrEmpty(RP.SearchQuery))
             {
-                products = _productRepository.GetProducts(resourceParameters);
-                title = resourceParameters.SearchQuery;
+                products = _productRepository.GetProducts(RP.Category, RP.Brand, RP.SearchQuery);
+                title = RP.SearchQuery;
             }
             else
             {

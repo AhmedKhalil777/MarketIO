@@ -1,7 +1,7 @@
 ﻿using MarketIO.DAL.Domain;
 
 
-namespace MarketIO.MVC.Repositories
+namespace MarketIO.DAL.Repositories
 {
     public interface IOrderRepository
     {

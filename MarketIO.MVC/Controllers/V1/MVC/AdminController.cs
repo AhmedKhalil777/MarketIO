@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MarketIO.DAL.Repositories;
 using MarketIO.MVC.Contracts.V1;
 using MarketIO.MVC.Contracts.V1.Requests;
 using MarketIO.MVC.Repositories;

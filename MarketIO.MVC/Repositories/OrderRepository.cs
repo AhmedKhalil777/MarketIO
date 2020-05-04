@@ -1,5 +1,6 @@
 ﻿using MarketIO.DAL.Data;
 using MarketIO.DAL.Domain;
+using MarketIO.DAL.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
