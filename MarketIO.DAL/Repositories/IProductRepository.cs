@@ -1,16 +1,15 @@
 ﻿using MarketIO.DAL.Domain;
-using MarketIO.MVC.ResourceParameters;
 using System.Collections.Generic;
 
-namespace MarketIO.MVC.Repositories
+namespace MarketIO.DAL.Repositories
 {
     public interface IProductRepository
     {
         IEnumerable<Products> AllProducts { get; }
-        IEnumerable<Products> GetProducts(ProductResourceParameters productResourceParameters);
+        IEnumerable<Products> GetProducts(string Catagory , string Brand , string SearchQuery);
         Products GetProductById(int id);
         IEnumerable<Products> ProductsOfTheWeek { get; }
-        Products DeleteProduct(int productId);
+        Products DeleteProduct(int productId , string path);
         void CreateProduct(Products product);
         void UpdateProduct(Products product);
     }

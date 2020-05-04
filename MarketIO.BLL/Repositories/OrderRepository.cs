@@ -1,11 +1,12 @@
 ﻿using MarketIO.DAL.Data;
 using MarketIO.DAL.Domain;
+using MarketIO.DAL.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MarketIO.MVC.Repositories
+namespace MarketIO.BLL.Repositories
 {
     public class OrderRepository : IOrderRepository
     {

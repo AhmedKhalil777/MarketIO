@@ -1,7 +1,7 @@
 ﻿
 
 @{ 
-    @using MarketIO.MVC.Repositories
+    @using MarketIO.BLL.Repositories
     var Admin = AccountRepository.Admin;
 }
 
@@ -14,7 +14,7 @@
     </div>
     <div class="user-info">
         <span class="user-name">
-            @Html.DisplayFor(model => Admin.Name)
+            @Html.DisplayFor(model => Admin.UserName)
         </span>
         <span class="user-name">
             @Html.DisplayFor(model => Admin.Email)

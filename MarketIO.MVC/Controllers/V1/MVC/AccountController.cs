@@ -2,22 +2,28 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MarketIO.DAL.Domain;
+using MarketIO.DAL.Repositories;
 using MarketIO.MVC.Contracts.V1;
 using MarketIO.MVC.Contracts.V1.Requests;
-using MarketIO.MVC.Contracts.V1.Responses;
-using MarketIO.MVC.Repositories;
+using MarketIO.MVC.FilesHosting;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting;
 
 namespace MarketIO.MVC.Controllers.V1.MVC
 {
     public class AccountController : Controller
     {
         private readonly IAccountRepository _account;
-        public AccountController(IAccountRepository account)
+        private readonly IHostEnvironment _hostEnvironment;
+        private readonly IFileUploader _fileUploader;
+        public AccountController(IAccountRepository account , IHostEnvironment hostEnvironment , IFileUploader fileUploader )
         {
             _account = account;
+            _hostEnvironment = hostEnvironment;
+            _fileUploader = fileUploader;
         }
         [AllowAnonymous]
         [HttpGet(MVCRoutes.Admin.Base)]
@@ -33,7 +39,7 @@ namespace MarketIO.MVC.Controllers.V1.MVC
         {
             if (ModelState.IsValid)
             {
-                var result = await _account.AdminLogin(model);
+                var result = await _account.AdminLogin(model.Email , model.Password , model.RemmemberMe);
 
                 if (result.Item2)
                 {
@@ -71,7 +77,13 @@ namespace MarketIO.MVC.Controllers.V1.MVC
 
             if (ModelState.IsValid)
             {
-                var result = await _account.AddAdmin(model);
+                var User = new Customers
+                {
+                    Email = model.Email,
+                    UserName = model.FirstName + model.LastName,
+                    SecurityStamp = Guid.NewGuid().ToString()
+                };
+                var result = await _account.AddAdmin(User , model.Password);
                 if(result.Item2)
                 {
                     return RedirectToAction("AdminLogin");
@@ -91,7 +103,7 @@ namespace MarketIO.MVC.Controllers.V1.MVC
         [HttpGet(MVCRoutes.Admin.EditAdmin)]
         public  IActionResult EditAdmin() 
         {
-           AdminViewModel Admin = _account.GetCurrentAdmin();
+           var Admin = _account.GetCurrentAdmin();
            return View(Admin); 
         }
         [Authorize(Roles = "Admin")]
@@ -105,7 +117,11 @@ namespace MarketIO.MVC.Controllers.V1.MVC
         [HttpPost(MVCRoutes.ChangeImage)]
         public async Task<IActionResult> ChangeImage(IFormFile imagefile)
         {
-            var result = await _account.ChangeImage(HttpContext.Session.GetString("AdminId"), imagefile);
+            var name = Guid.NewGuid().ToString() + imagefile.FileName;
+            string Path = _hostEnvironment.ContentRootPath + "\\wwwroot\\images\\Users\\";
+            string ImagePath = "\\images\\Users\\" + name;
+            _fileUploader.UploadFile(imagefile, Path, name);
+            var result = await _account.ChangeImage(HttpContext.Session.GetString("AdminId"), ImagePath);
             if (result)
             {
                 return Ok(new { status = 1 ,  Message ="Image Changed Successfuly" });

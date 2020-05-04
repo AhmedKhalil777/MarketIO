@@ -1,7 +1,7 @@
 ﻿using MarketIO.DAL.Domain;
 using System.Collections.Generic;
 
-namespace MarketIO.MVC.Repositories
+namespace MarketIO.DAL.Repositories
 {
     public interface ICategoryRepository
     {

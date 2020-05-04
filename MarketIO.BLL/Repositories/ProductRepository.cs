@@ -1,6 +1,6 @@
 ﻿using MarketIO.DAL.Data;
 using MarketIO.DAL.Domain;
-using MarketIO.MVC.ResourceParameters;
+using MarketIO.DAL.Repositories;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -9,18 +9,17 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MarketIO.MVC.Repositories
+namespace MarketIO.BLL.Repositories
 {
     public class ProductRepository : IProductRepository
     {
 
         private readonly MarketIODbContext _db;
-        private readonly IWebHostEnvironment hostEnvironment;
+        
 
-        public ProductRepository(MarketIODbContext db,IWebHostEnvironment hostEnvironment)
+        public ProductRepository(MarketIODbContext db)
         {
             _db = db;
-            this.hostEnvironment = hostEnvironment;
         }
 
         public IEnumerable<Products> AllProducts => _db.Products;
@@ -28,26 +27,26 @@ namespace MarketIO.MVC.Repositories
                         .Include(c => c.Category).Where(p => p.IsProductOfTheWeek && p.InStock);
 
 
-        public IEnumerable<Products> GetProducts(ProductResourceParameters productResourceParameters)
+        public IEnumerable<Products> GetProducts(string Category, string Brand, string SearchQuery)
         {
-            if (productResourceParameters == null)
+            if (Category == null && Brand ==null && SearchQuery == null )
             {
-                throw new ArgumentNullException(nameof(productResourceParameters));
+                throw new ArgumentNullException("Resouce Parmater Error");
             }
             var collection = _db.Products as IQueryable<Products>;
-            if (!string.IsNullOrWhiteSpace(productResourceParameters.Category))
+            if (!string.IsNullOrWhiteSpace(Category))
             {
-                var mainCategory = productResourceParameters.Category.Trim();
+                var mainCategory = Category.Trim();
                 collection = collection.Where(a => a.Category.Cat_Name == mainCategory);
             }
-            if (!string.IsNullOrWhiteSpace(productResourceParameters.Brand))
+            if (!string.IsNullOrWhiteSpace(Brand))
             {
-                var mainBrand = productResourceParameters.Brand.Trim();
+                var mainBrand =Brand.Trim();
                 collection = collection.Where(a => a.Brand.Brand_Name == mainBrand);
             }
-            if (!string.IsNullOrWhiteSpace(productResourceParameters.SearchQuery))
+            if (!string.IsNullOrWhiteSpace(SearchQuery))
             {
-                var searchQuery = productResourceParameters.SearchQuery.Trim();
+                var searchQuery = SearchQuery.Trim();
                 collection = collection.Where(c => c.Category.Cat_Name.ToLower().Contains(searchQuery.ToLower())
                 || c.Brand.Brand_Name.ToLower().Contains(searchQuery.ToLower())
                 || c.P_Name.ToLower().Contains(searchQuery.ToLower()));
@@ -74,12 +73,12 @@ namespace MarketIO.MVC.Repositories
             return _db.Products.FirstOrDefault(p => p.Product_Id == productId);
         }
 
-        public Products DeleteProduct(int productId)
+        public Products DeleteProduct(int productId , string path)
         {
             var deletedProduct = _db.Products.FirstOrDefault(p => p.Product_Id == productId);
             if (deletedProduct.Image!=null)
             {
-                string uploadsFolder = Path.Combine(hostEnvironment.WebRootPath, "images");
+                string uploadsFolder = Path.Combine(path, "images");
                 string filePath = Path.Combine(uploadsFolder, deletedProduct.Image);
                 File.Delete(filePath);
             }

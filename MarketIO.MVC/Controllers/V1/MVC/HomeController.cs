@@ -1,6 +1,6 @@
-﻿using MarketIO.MVC.Contracts.V1;
+﻿using MarketIO.DAL.Repositories;
+using MarketIO.MVC.Contracts.V1;
 using MarketIO.MVC.Contracts.V1.Responses;
-using MarketIO.MVC.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

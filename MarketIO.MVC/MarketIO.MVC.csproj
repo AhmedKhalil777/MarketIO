@@ -48,7 +48,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MarketIO.DAL\MarketIO.DAL\MarketIO.DAL.csproj" />
+    <ProjectReference Include="..\MarketIO.BLL\MarketIO.BLL.csproj" />
+    <ProjectReference Include="..\MarketIO.DAL\MarketIO.DAL.csproj" />
   </ItemGroup>
 
 
