@@ -1,6 +1,6 @@
-﻿using MarketIO.DAL.Repositories;
+﻿using MarketIO.BLL.Repositories;
+using MarketIO.DAL.Repositories;
 using MarketIO.MVC.FilesHosting;
-using MarketIO.MVC.Repositories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 

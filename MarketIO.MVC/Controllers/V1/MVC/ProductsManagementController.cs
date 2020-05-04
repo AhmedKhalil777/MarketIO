@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using MarketIO.DAL.Repositories;
 using MarketIO.MVC.Contracts.V1;
 using MarketIO.MVC.Contracts.V1.Responses;
-using MarketIO.MVC.Repositories;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -150,7 +149,8 @@ namespace MarketIO.MVC.Controllers.V1.MVC
         [HttpPost(MVCRoutes.Moderator.Products.DeleteProduct)]
         public IActionResult DeleteProduct(int ProductId)
         {
-            _productRepository.DeleteProduct(ProductId);
+            
+            _productRepository.DeleteProduct(ProductId ,hostingEnvironment.ContentRootPath);
 
             return RedirectToAction(nameof(Index));
         }

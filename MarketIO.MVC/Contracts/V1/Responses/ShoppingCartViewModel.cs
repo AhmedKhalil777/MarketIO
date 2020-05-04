@@ -1,4 +1,4 @@
-﻿using MarketIO.MVC.Repositories;
+﻿using MarketIO.BLL.Repositories;
 
 namespace MarketIO.MVC.Contracts.V1.Responses
 {

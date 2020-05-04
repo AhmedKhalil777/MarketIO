@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MarketIO.MVC", "MarketIO.MV
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MarketIO.DAL", "MarketIO.DAL\MarketIO.DAL.csproj", "{1907CDB7-D119-4BCA-A548-0D9EE32A3CC1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarketIO.BLL", "MarketIO.BLL\MarketIO.BLL.csproj", "{7DECC40E-A78E-4634-9B12-AFC37E008B50}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{1907CDB7-D119-4BCA-A548-0D9EE32A3CC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1907CDB7-D119-4BCA-A548-0D9EE32A3CC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1907CDB7-D119-4BCA-A548-0D9EE32A3CC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DECC40E-A78E-4634-9B12-AFC37E008B50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DECC40E-A78E-4634-9B12-AFC37E008B50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DECC40E-A78E-4634-9B12-AFC37E008B50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DECC40E-A78E-4634-9B12-AFC37E008B50}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

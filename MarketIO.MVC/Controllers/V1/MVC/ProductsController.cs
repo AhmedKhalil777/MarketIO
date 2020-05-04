@@ -7,7 +7,6 @@ using MarketIO.DAL.Repositories;
 using MarketIO.MVC.Contracts.V1;
 using MarketIO.MVC.Contracts.V1.Requests.ResourceParameters;
 using MarketIO.MVC.Contracts.V1.Responses;
-using MarketIO.MVC.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 

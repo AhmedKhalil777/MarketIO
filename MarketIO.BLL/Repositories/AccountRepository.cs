@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using MarketIO.DAL.Domain;
 using MarketIO.DAL.Repositories;
 
-namespace MarketIO.MVC.Repositories
+namespace MarketIO.BLL.Repositories
 {
     public class AccountRepository : IAccountRepository
     {

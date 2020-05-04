@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MarketIO.MVC.Repositories
+namespace MarketIO.BLL.Repositories
 {
     public class CustomerRepository : ICustomerRepository
     {

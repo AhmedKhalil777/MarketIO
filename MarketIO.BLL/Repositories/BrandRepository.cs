@@ -3,7 +3,7 @@ using MarketIO.DAL.Domain;
 using MarketIO.DAL.Repositories;
 using System.Collections.Generic;
 
-namespace MarketIO.MVC.Repositories
+namespace MarketIO.BLL.Repositories
 {
     public class BrandRepository : IBrandRepository
     {

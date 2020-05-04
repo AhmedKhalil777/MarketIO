@@ -9,18 +9,17 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MarketIO.MVC.Repositories
+namespace MarketIO.BLL.Repositories
 {
     public class ProductRepository : IProductRepository
     {
 
         private readonly MarketIODbContext _db;
-        private readonly IWebHostEnvironment hostEnvironment;
+        
 
-        public ProductRepository(MarketIODbContext db,IWebHostEnvironment hostEnvironment)
+        public ProductRepository(MarketIODbContext db)
         {
             _db = db;
-            this.hostEnvironment = hostEnvironment;
         }
 
         public IEnumerable<Products> AllProducts => _db.Products;
@@ -74,12 +73,12 @@ namespace MarketIO.MVC.Repositories
             return _db.Products.FirstOrDefault(p => p.Product_Id == productId);
         }
 
-        public Products DeleteProduct(int productId)
+        public Products DeleteProduct(int productId , string path)
         {
             var deletedProduct = _db.Products.FirstOrDefault(p => p.Product_Id == productId);
             if (deletedProduct.Image!=null)
             {
-                string uploadsFolder = Path.Combine(hostEnvironment.WebRootPath, "images");
+                string uploadsFolder = Path.Combine(path, "images");
                 string filePath = Path.Combine(uploadsFolder, deletedProduct.Image);
                 File.Delete(filePath);
             }
