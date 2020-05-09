@@ -10,7 +10,7 @@ namespace MarketIO.MVC.Instrallers
     {
         public void InstallServices(IServiceCollection services, IConfiguration configuration)
         {
-            services.AddControllersWithViews(o=> o.Filters.Add(new AuthorizeFilter()));
+            services.AddControllersWithViews(/*o=> o.Filters.Add(new AuthorizeFilter())*/);
             services.AddHttpContextAccessor();
             services.AddSession();
 

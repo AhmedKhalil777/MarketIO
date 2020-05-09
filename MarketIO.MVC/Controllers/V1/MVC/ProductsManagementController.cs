@@ -20,14 +20,19 @@ namespace MarketIO.MVC.Controllers.V1.MVC
         private readonly IProductRepository _productRepository;
         private readonly ICategoryRepository _categoryRepository;
         private readonly IBrandRepository _brandRepository;
+        private readonly IUploadFileRepository uploadFile;
         private readonly IWebHostEnvironment hostingEnvironment;
 
-        public ProductsManagementController(IProductRepository productRepository, ICategoryRepository categoryRepository
-                                            ,IBrandRepository brandRepository,IWebHostEnvironment hostingEnvironment)
+        public ProductsManagementController(IProductRepository productRepository
+                                            , ICategoryRepository categoryRepository
+                                            ,IBrandRepository brandRepository,
+                                            IUploadFileRepository uploadFile
+                                            ,IWebHostEnvironment hostingEnvironment)
         {
             this._productRepository = productRepository;
             this._categoryRepository = categoryRepository;
             this._brandRepository = brandRepository;
+            this.uploadFile = uploadFile;
             this.hostingEnvironment = hostingEnvironment;
         }
         // GET: /<controller>/
@@ -60,7 +65,7 @@ namespace MarketIO.MVC.Controllers.V1.MVC
            
             if (ModelState.IsValid)
             {
-                productEditViewModel.Product.Image = ProcessUploadedFile(productEditViewModel);
+                productEditViewModel.Product.Image = uploadFile.ProcessUploadedFile(productEditViewModel.Photo, "Products"); ;
                 productEditViewModel.Product.BrandId = productEditViewModel.BrandId;
                 productEditViewModel.Product.CategoryId = productEditViewModel.CategoryId;
 
@@ -118,7 +123,8 @@ namespace MarketIO.MVC.Controllers.V1.MVC
             {
                 if (ProductEditViewModel.Photo!=null)
                 {
-                    ProductEditViewModel.Product.Image = ProcessUploadedFile(ProductEditViewModel);
+                    ProductEditViewModel.Product.Image = uploadFile.ProcessUploadedFile(ProductEditViewModel.Photo, "Products");
+                        //ProcessUploadedFile(ProductEditViewModel);
                 }
                 ProductEditViewModel.Product.BrandId = ProductEditViewModel.BrandId;
                 ProductEditViewModel.Product.CategoryId = ProductEditViewModel.CategoryId;
@@ -150,26 +156,10 @@ namespace MarketIO.MVC.Controllers.V1.MVC
         public IActionResult DeleteProduct(int ProductId)
         {
             
-            _productRepository.DeleteProduct(ProductId ,hostingEnvironment.ContentRootPath);
+            _productRepository.DeleteProduct(ProductId ,hostingEnvironment.WebRootPath);
 
             return RedirectToAction(nameof(Index));
         }
 
-        private string ProcessUploadedFile(ProductEditViewModel model)
-        {
-            string uniqueFileName = null;
-            if (model.Photo != null)
-            {
-                string uploadsFolder = Path.Combine(hostingEnvironment.WebRootPath, "images");
-                uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Photo.FileName;
-                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-                using (var fileStream = new FileStream(filePath, FileMode.Create))
-                {
-                    model.Photo.CopyTo(fileStream);
-                }
-            }
-
-            return uniqueFileName;
-        }
     }
 }

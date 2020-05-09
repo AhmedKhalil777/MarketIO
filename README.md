@@ -1,14 +1,20 @@
 # MarketIO.MVC
 An Eshop website written in .Net Core MVC
 
-## This if for Carreer Resume
-- How To Buld new Ecommerce website using technolgy of Dotnet Core (MVC,API)
+## This is for Carreer Resume
+- How To Buld new Ecommerce website  using N-Tier Architecture and technolgy of Dotnet Core (MVC,API)
+
 
 ## Continuous Integration & Continuous Testing
 |Type|Place|Badge|
 |:-|:-|:-|
 | Build On Ubunto Status|Github| ![.NET Core](https://github.com/mansoura-cis/MarketIO.MVC/workflows/.NET%20Core/badge.svg?branch=master)|
 |Build and Test Circle CI Pieplines| CircleCI|[![CircleCI](https://circleci.com/gh/AhmedKhalil777/MarketIO.MVC.svg?style=svg)](https://circleci.com/gh/AhmedKhalil777/MarketIO.MVC)|
+
+
+## N-Tier Architecture 
+![](Learn/Architecture.png)
+
 ## Features 
 - Admin Management Dashboard in {Domain/Admin}
 - Moderator Management Dashboard in {Domain/Moderator}
@@ -20,7 +26,7 @@ An Eshop website written in .Net Core MVC
 - Update migrations to accept the DB 
 
 
-## Installed Packages
+## Dependencies
 - EntityFramework Core 
 - IdentiryFramework
 - AutoMapper

@@ -10,6 +10,7 @@ namespace MarketIO.MVC.Instrallers
     {
         public void InstallServices(IServiceCollection services, IConfiguration configuration)
         {
+            services.AddTransient<IUploadFileRepository, UploadFileRepository>();
             services.AddTransient<IProductRepository, ProductRepository>();
             services.AddTransient<IBrandRepository, BrandRepository>();
             services.AddTransient<IOrderRepository, OrderRepository>();
