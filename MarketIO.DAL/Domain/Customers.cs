@@ -8,6 +8,7 @@ namespace MarketIO.DAL.Domain
 {
     public class Customers : IdentityUser
     {
+
         public string Image { get; set; } = "~/images/DefaultImage.png";
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -16,5 +17,6 @@ namespace MarketIO.DAL.Domain
         public string State { get; set; }
         public string Zip_Code { get; set; }
         public List<Orders> Orders { get; set; } 
+
     }
 }

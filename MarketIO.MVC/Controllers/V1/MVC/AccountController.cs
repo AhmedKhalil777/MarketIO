@@ -33,6 +33,25 @@ namespace MarketIO.MVC.Controllers.V1.MVC
             return View();
         }
 
+
+        [AllowAnonymous]
+        [HttpGet(MVCRoutes.Application.Register)]
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+
+        [AllowAnonymous]
+        [HttpPost(MVCRoutes.Application.Register)]
+        public IActionResult Register(CustomerRegisterViewModel model)
+        {
+            var Customer = new Customers
+            {
+                
+            };
+        }
+
         [AllowAnonymous]
         [HttpPost(MVCRoutes.Admin.Base)]
         public async Task<IActionResult> AdminLogin(LoginViewModel model)

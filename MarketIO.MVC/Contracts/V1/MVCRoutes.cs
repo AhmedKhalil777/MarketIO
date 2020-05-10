@@ -12,6 +12,8 @@ namespace MarketIO.MVC.Contracts.V1
         public const string ChangeImage = "/Image";
         public const string Version = "";
 
+
+
         public static class Admin
         {
             public const string Base = Version + "/Admin";
@@ -107,6 +109,9 @@ namespace MarketIO.MVC.Contracts.V1
         public static class Application
         {
             public const string Base = Version + "/";
+            public const string SignIn = Base +"SignIn/";
+            public const string Register = Base + "Register/";
+
             
             public static class Products
             {
@@ -123,7 +128,7 @@ namespace MarketIO.MVC.Contracts.V1
         }
 
 
-
+        
 
 
     }
