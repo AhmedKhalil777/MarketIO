@@ -50,6 +50,8 @@ namespace MarketIO.MVC.Controllers.V1.MVC
             {
                 
             };
+
+            return View();
         }
 
         [AllowAnonymous]
