@@ -1,7 +1,7 @@
 ﻿using MarketIO.DAL.Domain;
 using System.Collections.Generic;
 
-namespace MarketIO.MVC.Contracts.V1.Requests
+namespace MarketIO.Contracts.V1.Requests
 {
     public class CategoryAndBrandViewModel
     {

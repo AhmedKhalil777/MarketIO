@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 
 
-namespace MarketIO.MVC.Contracts.V1.Requests
+namespace MarketIO.Contracts.V1.Requests
 {
     public class EditAdminViewModel
     {
