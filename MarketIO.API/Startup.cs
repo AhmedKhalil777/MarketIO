@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using MarketIO.API.Installers;
 using MarketIO.API.Settings;
 using Microsoft.AspNetCore.Builder;
@@ -29,6 +30,7 @@ namespace MarketIO.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.InstallServicesInAssemply(Configuration);
+            services.AddAutoMapper(typeof(Startup));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MarketIO.MVC.Contracts.V1
+namespace MarketIO.Contracts.V1
 {
     public static class MVCRoutes
     {

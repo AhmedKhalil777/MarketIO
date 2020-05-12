@@ -6,23 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Contracts\V1\Responses\**" />
     <Compile Remove="Profiles\**" />
-    <Content Remove="Contracts\V1\Responses\**" />
     <Content Remove="Profiles\**" />
-    <EmbeddedResource Remove="Contracts\V1\Responses\**" />
     <EmbeddedResource Remove="Profiles\**" />
-    <None Remove="Contracts\V1\Responses\**" />
     <None Remove="Profiles\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="Contracts\V1\Responses\AdminViewModel.cs" />
-    <Compile Include="Contracts\V1\Responses\HomeViewModel.cs" />
-    <Compile Include="Contracts\V1\Responses\ProductDetailViewModel.cs" />
-    <Compile Include="Contracts\V1\Responses\ProductEditViewModel.cs" />
-    <Compile Include="Contracts\V1\Responses\ProductsListViewModel.cs" />
-    <Compile Include="Contracts\V1\Responses\ShoppingCartViewModel.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -49,6 +36,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MarketIO.BLL\MarketIO.BLL.csproj" />
+    <ProjectReference Include="..\MarketIO.Contracts\MarketIO.Contracts.csproj" />
     <ProjectReference Include="..\MarketIO.DAL\MarketIO.DAL.csproj" />
   </ItemGroup>
 

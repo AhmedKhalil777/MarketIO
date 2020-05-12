@@ -13,13 +13,17 @@ namespace MarketIO.API.Auth
 {
     public class JwtAuthHandler
     {
-        private readonly JwtSettings _settings;
+        private readonly IConfiguration _configuration;
         public JwtAuthHandler(IConfiguration configuration)
         {
-            configuration.GetSection(nameof(JwtSettings)).Bind(_settings);
+            _configuration = configuration;
         }
+
         public string CreateToken(Customers customer , string Role)
         {
+            JwtSettings _settings = new JwtSettings();
+            
+            _configuration.GetSection(nameof(JwtSettings)).Bind(_settings);
             var tokenHendler = new JwtSecurityTokenHandler();
             var key = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_settings.Secret));
             var tokenDescriptor = new SecurityTokenDescriptor()
