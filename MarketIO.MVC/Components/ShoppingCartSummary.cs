@@ -1,5 +1,5 @@
 ﻿using MarketIO.BLL.Repositories;
-using MarketIO.MVC.Contracts.V1.Responses;
+using MarketIO.Contracts.V1.Responses;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;

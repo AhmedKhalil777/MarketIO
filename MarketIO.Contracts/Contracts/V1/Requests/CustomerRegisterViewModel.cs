@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MarketIO.MVC.Contracts.V1.Requests
+namespace MarketIO.Contracts.V1.Requests
 {
     public class CustomerRegisterViewModel : RegisterViewModel
     {

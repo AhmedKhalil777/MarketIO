@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MarketIO.MVC.Contracts.V1.Requests.ResourceParameters
+namespace MarketIO.Contracts.V1.Requests.ResourceParameters
 {
     public class ProductResourceParameters
     {

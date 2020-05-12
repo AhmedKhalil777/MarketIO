@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MarketIO.DAL", "MarketIO.DA
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MarketIO.BLL", "MarketIO.BLL\MarketIO.BLL.csproj", "{7DECC40E-A78E-4634-9B12-AFC37E008B50}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarketIO.API", "MarketIO.API\MarketIO.API.csproj", "{3908EB1A-BD82-49D3-97F0-B4331DBE4899}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MarketIO.API", "MarketIO.API\MarketIO.API.csproj", "{3908EB1A-BD82-49D3-97F0-B4331DBE4899}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarketIO.Contracts", "MarketIO.Contracts\MarketIO.Contracts.csproj", "{729498E0-B6D2-4ED6-9D97-BB6D7A07C95F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{3908EB1A-BD82-49D3-97F0-B4331DBE4899}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3908EB1A-BD82-49D3-97F0-B4331DBE4899}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3908EB1A-BD82-49D3-97F0-B4331DBE4899}.Release|Any CPU.Build.0 = Release|Any CPU
+		{729498E0-B6D2-4ED6-9D97-BB6D7A07C95F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{729498E0-B6D2-4ED6-9D97-BB6D7A07C95F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{729498E0-B6D2-4ED6-9D97-BB6D7A07C95F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{729498E0-B6D2-4ED6-9D97-BB6D7A07C95F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
