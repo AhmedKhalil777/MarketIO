@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MarketIO.API.Installers;
+using MarketIO.API.Settings;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -11,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace MarketIO.API
 {
@@ -38,11 +40,24 @@ namespace MarketIO.API
             }
 
             app.UseHttpsRedirection();
-
+            app.UseCors("EnableCors");
             app.UseRouting();
             app.UseAuthorization();
             app.UseAuthorization();
+            var swaggerSettings = new SwaggerSettings();
+            Configuration.GetSection(nameof(SwaggerSettings)).Bind(swaggerSettings);
+            app.UseSwagger(options =>
+            {
+                options.RouteTemplate = swaggerSettings.JsonRoute;
+            });
 
+            app.UseSwaggerUI(options =>
+            {
+                options.SwaggerEndpoint(swaggerSettings.UIEndPoint, swaggerSettings.Description);
+
+                options.DocumentTitle = "MarketIO";
+                options.DocExpansion(DocExpansion.None);
+            });
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
