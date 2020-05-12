@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using MarketIO.BLL.Repositories;
 using MarketIO.DAL.Repositories;
-using MarketIO.MVC.Contracts.V1.Responses;
+using MarketIO.Contracts.V1.Responses;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860

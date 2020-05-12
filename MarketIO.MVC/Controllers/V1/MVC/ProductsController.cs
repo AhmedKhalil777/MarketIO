@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using MarketIO.DAL.Domain;
 using MarketIO.DAL.Repositories;
-using MarketIO.MVC.Contracts.V1;
-using MarketIO.MVC.Contracts.V1.Requests.ResourceParameters;
-using MarketIO.MVC.Contracts.V1.Responses;
+using MarketIO.Contracts.V1;
+using MarketIO.Contracts.V1.Requests.ResourceParameters;
+using MarketIO.Contracts.V1.Responses;
 using Microsoft.AspNetCore.Mvc;
 
 
